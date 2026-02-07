@@ -18,9 +18,9 @@ new class extends Component {
 
     public array $relations = [];
 
-    public function mount(mixed $model = null): void
+    public function mount(): void
     {
-        $this->initDetail($model);
+        $this->initDetail();
 
         if (($this->relations['study_material_id'] ?? null) && ! isset($this->detailData['study_material_id'])) {
             $this->detailData['study_material_id'] = $this->relations['study_material_id'];
