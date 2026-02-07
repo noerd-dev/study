@@ -10,13 +10,13 @@ new class extends Component {
 
     public ?int $studyMaterialId = null;
 
-    public function listAction(mixed $modelId = null, mixed $relationId = null): void
+    public function listAction(mixed $modelId = null, array $relations = []): void
     {
         $this->dispatch(
             event: 'noerdModal',
             modalComponent: 'summary-detail',
             source: $this->getComponentName(),
-            arguments: ['modelId' => $modelId, 'relationId' => $this->studyMaterialId ?? $relationId],
+            arguments: ['modelId' => $modelId, 'relations' => $this->studyMaterialId ? ['study_material_id' => $this->studyMaterialId] : $relations],
         );
     }
 

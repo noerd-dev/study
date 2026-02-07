@@ -16,14 +16,14 @@ new class extends Component {
 
     public const DETAIL_CLASS = Flashcard::class;
 
-    public $relationId = null;
+    public array $relations = [];
 
     public function mount(mixed $model = null): void
     {
         $this->initDetail($model);
 
-        if ($this->relationId && ! isset($this->detailData['study_material_id'])) {
-            $this->detailData['study_material_id'] = $this->relationId;
+        if (($this->relations['study_material_id'] ?? null) && ! isset($this->detailData['study_material_id'])) {
+            $this->detailData['study_material_id'] = $this->relations['study_material_id'];
         }
 
         if ($this->detailData['study_material_id'] ?? null) {

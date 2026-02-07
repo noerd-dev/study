@@ -74,13 +74,13 @@ it('handles summary selection correctly', function () use ($testSettings): void 
         ->assertHasNoErrors();
 });
 
-it('sets study_material_id from relationId on mount', function () use ($testSettings): void {
+it('sets study_material_id from relations on mount', function () use ($testSettings): void {
     $user = $this->withStudyModule();
     $studyMaterial = StudyMaterial::factory()->create(['tenant_id' => $user->selected_tenant_id]);
 
     $this->actingAs($user);
 
-    Livewire::test($testSettings['componentName'], ['relationId' => $studyMaterial->id])
+    Livewire::test($testSettings['componentName'], ['relations' => ['study_material_id' => $studyMaterial->id]])
         ->assertSet('detailData.study_material_id', $studyMaterial->id)
         ->assertSet('relationTitles.study_material_id', $studyMaterial->title)
         ->assertHasNoErrors();
