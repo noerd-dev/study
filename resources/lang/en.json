@@ -1,0 +1,48 @@
+{
+    "study_nav_learning": "Learning",
+    "study_nav_study_materials": "Study Materials",
+    "study_nav_summaries": "Summaries",
+    "study_nav_flashcards": "Flashcards",
+
+    "study_study_material": "Study Material",
+    "study_summary": "Summary",
+    "study_flashcard": "Flashcard",
+
+    "study_label_study_materials": "Study Materials",
+    "study_label_new_study_material": "New Study Material",
+    "study_label_study_material": "Study Material",
+    "study_label_select_study_material": "Select Study Material",
+
+    "study_label_summaries": "Summaries",
+    "study_label_new_summary": "New Summary",
+    "study_label_summary": "Summary",
+
+    "study_label_flashcards": "Flashcards",
+    "study_label_new_flashcard": "New Flashcard",
+    "study_label_flashcard": "Flashcard",
+
+    "study_label_title": "Title",
+    "study_label_author": "Author",
+    "study_label_page_count": "Page Count",
+    "study_label_publication_year": "Publication Year",
+    "study_label_book": "Book",
+    "study_label_cover_image": "Book Cover",
+    "study_label_content": "Content",
+    "study_label_question": "Question",
+    "study_label_answer": "Answer",
+    "study_label_created_date": "Created Date",
+    "study_label_created_at": "Created At",
+
+    "study_tab_general": "General",
+    "study_tab_summaries": "Summaries",
+    "study_tab_flashcards": "Flashcards",
+
+    "study_nav_print_flashcards": "Print Flashcards",
+    "study_label_print_flashcards": "Print Flashcards",
+    "study_label_select_flashcards": "Select flashcards (max. 8)",
+    "study_label_generate_pdf": "Generate PDF",
+    "study_label_no_flashcards_selected": "Please select at least one flashcard.",
+    "study_label_max_flashcards": "Maximum 8 flashcards can be selected.",
+    "study_label_questions": "Questions",
+    "study_label_answers": "Answers"
+}

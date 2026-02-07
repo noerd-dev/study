@@ -1,0 +1,48 @@
+{
+    "study_nav_learning": "Lernen",
+    "study_nav_study_materials": "Lernmaterialien",
+    "study_nav_summaries": "Zusammenfassungen",
+    "study_nav_flashcards": "Karteikarten",
+
+    "study_study_material": "Lernmaterial",
+    "study_summary": "Zusammenfassung",
+    "study_flashcard": "Karteikarte",
+
+    "study_label_study_materials": "Lernmaterialien",
+    "study_label_new_study_material": "Neues Lernmaterial",
+    "study_label_study_material": "Lernmaterial",
+    "study_label_select_study_material": "Lernmaterial auswählen",
+
+    "study_label_summaries": "Zusammenfassungen",
+    "study_label_new_summary": "Neue Zusammenfassung",
+    "study_label_summary": "Zusammenfassung",
+
+    "study_label_flashcards": "Karteikarten",
+    "study_label_new_flashcard": "Neue Karteikarte",
+    "study_label_flashcard": "Karteikarte",
+
+    "study_label_title": "Titel",
+    "study_label_author": "Autor",
+    "study_label_page_count": "Seitenanzahl",
+    "study_label_publication_year": "Erscheinungsjahr",
+    "study_label_book": "Buch",
+    "study_label_cover_image": "Buchcover",
+    "study_label_content": "Inhalt",
+    "study_label_question": "Frage",
+    "study_label_answer": "Antwort",
+    "study_label_created_date": "Erstellungsdatum",
+    "study_label_created_at": "Erstellt am",
+
+    "study_tab_general": "Allgemein",
+    "study_tab_summaries": "Zusammenfassungen",
+    "study_tab_flashcards": "Karteikarten",
+
+    "study_nav_print_flashcards": "Karteikarten drucken",
+    "study_label_print_flashcards": "Karteikarten drucken",
+    "study_label_select_flashcards": "Karteikarten auswählen (max. 8)",
+    "study_label_generate_pdf": "PDF erstellen",
+    "study_label_no_flashcards_selected": "Bitte wählen Sie mindestens eine Karteikarte aus.",
+    "study_label_max_flashcards": "Maximal 8 Karteikarten können ausgewählt werden.",
+    "study_label_questions": "Fragen",
+    "study_label_answers": "Antworten"
+}

@@ -1,0 +1,26 @@
+{
+	"name": "noerd/study",
+	"description": "Study module for Noerd Framework",
+	"type": "library",
+	"version": "0.1.0",
+	"license": "proprietary",
+    "require": {
+        "noerd/noerd": "^0.1"
+    },
+	"autoload": {
+		"psr-4": {
+			"Nywerk\\Study\\": "src/",
+			"Nywerk\\Study\\Tests\\": "tests/",
+			"Nywerk\\Study\\Database\\Factories\\": "database/factories/",
+			"Nywerk\\Study\\Database\\Seeders\\": "database/seeders/"
+		}
+	},
+	"minimum-stability": "stable",
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Nywerk\\Study\\Providers\\StudyServiceProvider"
+			]
+		}
+	}
+}
