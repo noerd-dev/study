@@ -16,7 +16,6 @@ class StudyMaterialFactory extends Factory
             'title' => $this->faker->sentence(3),
             'author' => $this->faker->name(),
             'page_count' => $this->faker->numberBetween(100, 800),
-            'media_id' => null,
             'publication_year' => $this->faker->numberBetween(1990, 2025),
         ];
     }

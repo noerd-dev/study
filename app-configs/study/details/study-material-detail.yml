@@ -31,9 +31,3 @@ fields:
     label: study_label_publication_year
     type: number
     colspan: 6
-  - name: detailData.media_id
-    label: study_label_cover_image
-    type: relation
-    colspan: 12
-    relationField: media
-    modalComponent: media-list

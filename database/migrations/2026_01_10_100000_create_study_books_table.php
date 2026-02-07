@@ -13,12 +13,10 @@ return new class () extends Migration {
             $table->string('title');
             $table->string('author')->nullable();
             $table->integer('page_count')->nullable();
-            $table->unsignedBigInteger('media_id')->nullable();
             $table->integer('publication_year')->nullable();
             $table->timestamps();
 
             $table->foreign('tenant_id')->references('id')->on('tenants');
-            $table->foreign('media_id')->references('id')->on('media')->nullOnDelete();
             $table->index('tenant_id');
         });
     }
