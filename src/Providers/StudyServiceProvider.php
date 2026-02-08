@@ -5,6 +5,7 @@ namespace Nywerk\Study\Providers;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 use Nywerk\Study\Commands\StudyInstallCommand;
+use Nywerk\Study\Commands\StudyUpdateCommand;
 
 class StudyServiceProvider extends ServiceProvider
 {
@@ -24,6 +25,7 @@ class StudyServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 StudyInstallCommand::class,
+                StudyUpdateCommand::class,
             ]);
         }
     }
