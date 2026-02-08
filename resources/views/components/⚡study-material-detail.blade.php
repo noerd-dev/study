@@ -16,6 +16,8 @@ new class extends Component {
     public function mount(): void
     {
         $this->initDetail();
+
+        $this->setPreselect('study_material_id', $this->modelId);
     }
 
     public function store(): void

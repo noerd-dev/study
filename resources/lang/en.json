@@ -46,5 +46,6 @@
     "study_label_no_flashcards_selected": "Please select at least one flashcard.",
     "study_label_max_flashcards": "Maximum 8 flashcards can be selected.",
     "study_label_questions": "Questions",
-    "study_label_answers": "Answers"
+    "study_label_answers": "Answers",
+    "study_label_all_study_materials": "All Study Materials"
 }

@@ -75,6 +75,20 @@ it('handles summary selection correctly', function () use ($testSettings): void 
         ->assertHasNoErrors();
 });
 
+it('preselects study material from session on mount', function () use ($testSettings): void {
+    $user = $this->withStudyModule();
+    $studyMaterial = StudyMaterial::factory()->create(['tenant_id' => $user->selected_tenant_id]);
+
+    $this->actingAs($user);
+
+    session(['listFilters' => ['study_material_id' => $studyMaterial->id]]);
+
+    Livewire::test($testSettings['componentName'])
+        ->assertSet('detailData.study_material_id', $studyMaterial->id)
+        ->assertSet('relationTitles.study_material_id', $studyMaterial->title)
+        ->assertHasNoErrors();
+});
+
 it('sets study_material_id from relations on mount', function () use ($testSettings): void {
     $user = $this->withStudyModule();
     $studyMaterial = StudyMaterial::factory()->create(['tenant_id' => $user->selected_tenant_id]);

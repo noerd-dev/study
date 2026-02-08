@@ -4,9 +4,11 @@ use Livewire\Component;
 use Noerd\Scopes\SortScope;
 use Noerd\Traits\NoerdList;
 use Nywerk\Study\Models\Flashcard;
+use Nywerk\Study\Traits\StudyMaterialFilterTrait;
 
 new class extends Component {
     use NoerdList;
+    use StudyMaterialFilterTrait;
 
     public ?int $studyMaterialId = null;
 
@@ -27,6 +29,7 @@ new class extends Component {
             ->when($this->studyMaterialId, function ($query): void {
                 $query->where('study_material_id', $this->studyMaterialId);
             })
+            ->tap(fn ($query) => $this->applyListFilters($query))
             ->orderBy($this->sortField ?: 'created_date', $this->sortAsc ? 'asc' : 'desc')
             ->paginate(self::PAGINATION);
 
@@ -42,6 +45,8 @@ new class extends Component {
 
     public function rendering()
     {
+        $this->loadListFilters();
+
         if ((int) request()->flashcardId) {
             $this->listAction(request()->flashcardId);
         }
@@ -53,5 +58,5 @@ new class extends Component {
 }; ?>
 
 <x-noerd::page :disableModal="$disableModal">
-    <x-noerd::list />
+    <x-noerd::list :relations="$studyMaterialId ? ['study_material_id' => $studyMaterialId] : []" />
 </x-noerd::page>

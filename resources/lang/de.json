@@ -46,5 +46,6 @@
     "study_label_no_flashcards_selected": "Bitte wählen Sie mindestens eine Karteikarte aus.",
     "study_label_max_flashcards": "Maximal 8 Karteikarten können ausgewählt werden.",
     "study_label_questions": "Fragen",
-    "study_label_answers": "Antworten"
+    "study_label_answers": "Antworten",
+    "study_label_all_study_materials": "Alle Lernmaterialien"
 }

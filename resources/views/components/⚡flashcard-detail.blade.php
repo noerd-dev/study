@@ -34,6 +34,8 @@ new class extends Component {
             $this->relationTitles['summary_id'] = Summary::find($this->detailData['summary_id'])?->title;
         }
 
+        $this->preselect('study_material_id');
+
         if (! isset($this->detailData['created_date'])) {
             $this->detailData['created_date'] = now()->format('Y-m-d');
         }
