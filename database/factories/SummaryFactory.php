@@ -14,7 +14,7 @@ class SummaryFactory extends Factory
         return [
             'tenant_id' => 1,
             'study_material_id' => null,
-            'title' => 'Kapitel ' . $this->faker->numberBetween(1, 20),
+            'title' => 'Chapter ' . $this->faker->numberBetween(1, 20),
             'content' => $this->faker->paragraphs(3, true),
         ];
     }

@@ -19,14 +19,7 @@ class Flashcard extends Model
 
     protected $table = 'study_flashcards';
 
-    protected $fillable = [
-        'tenant_id',
-        'study_material_id',
-        'summary_id',
-        'question',
-        'answer',
-        'created_date',
-    ];
+    protected $guarded = [];
 
     protected array $searchable = [
         'question',

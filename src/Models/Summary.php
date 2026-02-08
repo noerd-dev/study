@@ -19,12 +19,7 @@ class Summary extends Model
 
     protected $table = 'study_summaries';
 
-    protected $fillable = [
-        'tenant_id',
-        'study_material_id',
-        'title',
-        'content',
-    ];
+    protected $guarded = [];
 
     protected array $searchable = [
         'title',
