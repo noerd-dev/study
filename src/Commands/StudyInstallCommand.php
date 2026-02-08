@@ -50,7 +50,7 @@ class StudyInstallCommand extends Command
 
     protected function getAppRoute(): string
     {
-        return 'study.study-materials';
+        return 'study.dashboard';
     }
 
     protected function getSourceDir(): string

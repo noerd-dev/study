@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Nywerk\Study\Http\Controllers\FlashcardPrintController;
 
 Route::group(['middleware' => ['web', 'auth', 'verified']], function (): void {
+    Route::livewire('study', 'study-dashboard')->name('study.dashboard');
     Route::livewire('study/study-materials', 'study-materials-list')->name('study.study-materials');
     Route::livewire('study/study-material/{modelId}', 'study-material-detail')->name('study.study-material.detail');
     Route::livewire('study/summaries', 'summaries-list')->name('study.summaries');

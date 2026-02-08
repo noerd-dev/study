@@ -1,8 +1,11 @@
 - title: Study
   name: study
   hidden: true
-  route: study.study-materials
+  route: study.dashboard
   block_menus:
+    - title: study_nav_dashboard
+      route: study.dashboard
+      heroicon: home
     - title: study_nav_learning
       navigations:
         - title: study_nav_study_materials
