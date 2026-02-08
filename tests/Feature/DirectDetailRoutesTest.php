@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
 
-uses(Tests\TestCase::class);
+uses(Tests\TestCase::class, RefreshDatabase::class);
 
 it('has direct route for study-material-detail', function (): void {
     expect(Route::has('study.study-material.detail'))->toBeTrue();

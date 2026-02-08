@@ -1,10 +1,11 @@
 <?php
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Nywerk\Study\Models\StudyMaterial;
 use Nywerk\Study\Models\Summary;
 use Nywerk\Study\Tests\Traits\CreatesStudyUser;
 
-uses(Tests\TestCase::class);
+uses(Tests\TestCase::class, RefreshDatabase::class);
 uses(CreatesStudyUser::class);
 
 $testSettings = [

@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Nywerk\Study\Models\Flashcard;
 use Nywerk\Study\Models\StudyMaterial;
 use Nywerk\Study\Tests\Traits\CreatesStudyUser;
 
-uses(Tests\TestCase::class);
+uses(Tests\TestCase::class, RefreshDatabase::class);
 uses(CreatesStudyUser::class);
 
 it('can view the flashcard print page', function (): void {
