@@ -22,11 +22,22 @@ class StudyServiceProvider extends ServiceProvider
         $this->loadJsonTranslationsFrom(__DIR__ . '/../../resources/lang');
         $this->loadRoutesFrom(__DIR__ . '/../../routes/study-routes.php');
 
+        $this->ensureFontsDirectoryExists();
+
         if ($this->app->runningInConsole()) {
             $this->commands([
                 StudyInstallCommand::class,
                 StudyUpdateCommand::class,
             ]);
+        }
+    }
+
+    private function ensureFontsDirectoryExists(): void
+    {
+        $fontsPath = storage_path('fonts');
+
+        if (! is_dir($fontsPath)) {
+            mkdir($fontsPath, 0755, true);
         }
     }
 }
