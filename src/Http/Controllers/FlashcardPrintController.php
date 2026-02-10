@@ -12,11 +12,6 @@ use PDF;
 
 class FlashcardPrintController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function print(Request $request)
     {
         $flashcardIds = $request->input('flashcard_ids', []);
