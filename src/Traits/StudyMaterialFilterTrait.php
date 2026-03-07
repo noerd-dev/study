@@ -16,7 +16,7 @@ trait StudyMaterialFilterTrait
         ];
 
         $options = StudyMaterial::orderBy('title', 'asc')->get()
-            ->map(fn ($studyMaterial) => [
+            ->map(fn($studyMaterial) => [
                 'id' => $studyMaterial->id,
                 'name' => $studyMaterial->title,
             ])
