@@ -24,14 +24,9 @@ new class extends Component {
     {
         $this->validateFromLayout();
 
-        $this->detailData['tenant_id'] = auth()->user()->selected_tenant_id;
         $studyMaterial = StudyMaterial::updateOrCreate(['id' => $this->modelId], $this->detailData);
 
-        $this->showSuccessIndicator = true;
-
-        if ($studyMaterial->wasRecentlyCreated) {
-            $this->modelId = $studyMaterial->id;
-        }
+        $this->storeProcess($studyMaterial);
     }
 
     public function delete(): void

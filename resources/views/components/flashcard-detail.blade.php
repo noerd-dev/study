@@ -64,14 +64,9 @@ new class extends Component {
             'detailData.study_material_id' => ['required', 'exists:study_materials,id'],
         ]);
 
-        $this->detailData['tenant_id'] = auth()->user()->selected_tenant_id;
         $flashcard = Flashcard::updateOrCreate(['id' => $this->modelId], $this->detailData);
 
-        $this->showSuccessIndicator = true;
-
-        if ($flashcard->wasRecentlyCreated) {
-            $this->modelId = $flashcard->id;
-        }
+        $this->storeProcess($flashcard);
     }
 
     public function delete(): void

@@ -45,14 +45,9 @@ new class extends Component {
             'detailData.study_material_id' => ['required', 'exists:study_materials,id'],
         ]);
 
-        $this->detailData['tenant_id'] = auth()->user()->selected_tenant_id;
         $summary = Summary::updateOrCreate(['id' => $this->modelId], $this->detailData);
 
-        $this->showSuccessIndicator = true;
-
-        if ($summary->wasRecentlyCreated) {
-            $this->modelId = $summary->id;
-        }
+        $this->storeProcess($summary);
     }
 
     public function delete(): void
