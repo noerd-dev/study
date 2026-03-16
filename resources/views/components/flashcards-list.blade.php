@@ -1,7 +1,6 @@
 <?php
 
 use Livewire\Component;
-use Noerd\Scopes\SortScope;
 use Noerd\Traits\NoerdList;
 use Nywerk\Study\Models\Flashcard;
 use Nywerk\Study\Traits\StudyMaterialFilterTrait;
@@ -24,13 +23,12 @@ new class extends Component {
 
     public function with()
     {
-        $rows = Flashcard::withoutGlobalScope(SortScope::class)
+        $rows = $this->listQuery(Flashcard::class)
             ->with('studyMaterial', 'summary')
             ->when($this->studyMaterialId, function ($query): void {
                 $query->where('study_material_id', $this->studyMaterialId);
             })
             ->tap(fn ($query) => $this->applyListFilters($query))
-            ->orderBy($this->sortField ?: 'created_date', $this->sortAsc ? 'asc' : 'desc')
             ->paginate(self::PAGINATION);
 
         foreach ($rows as $row) {

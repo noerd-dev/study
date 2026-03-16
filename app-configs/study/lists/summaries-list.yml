@@ -1,8 +1,11 @@
 title: study_label_summaries
-newLabel: study_label_new_summary
-component: summary-detail
+searchableColumns:
+  - title
+  - content
+actions:
+  - label: study_label_new_summary
+    action: listAction
 disableSearch: false
-redirectAction: ''
 columns:
   - field: title
     label: study_label_title

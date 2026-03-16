@@ -1,8 +1,11 @@
 title: study_label_flashcards
-newLabel: study_label_new_flashcard
-component: flashcard-detail
+searchableColumns:
+  - question
+  - answer
+actions:
+  - label: study_label_new_flashcard
+    action: listAction
 disableSearch: false
-redirectAction: ''
 columns:
   - field: question
     label: study_label_question

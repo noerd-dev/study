@@ -1,7 +1,6 @@
 <?php
 
 use Livewire\Component;
-use Noerd\Scopes\SortScope;
 use Noerd\Traits\NoerdList;
 use Nywerk\Study\Models\StudyMaterial;
 
@@ -20,8 +19,7 @@ new class extends Component {
 
     public function with()
     {
-        $rows = StudyMaterial::withoutGlobalScope(SortScope::class)
-            ->orderBy($this->sortField ?: 'title', $this->sortAsc ? 'asc' : 'desc')
+        $rows = $this->listQuery(StudyMaterial::class)
             ->paginate(self::PAGINATION);
 
         return [

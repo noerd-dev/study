@@ -1,7 +1,6 @@
 <?php
 
 use Livewire\Component;
-use Noerd\Scopes\SortScope;
 use Noerd\Traits\NoerdList;
 use Nywerk\Study\Models\Summary;
 
@@ -22,12 +21,11 @@ new class extends Component {
 
     public function with()
     {
-        $rows = Summary::withoutGlobalScope(SortScope::class)
+        $rows = $this->listQuery(Summary::class)
             ->with('studyMaterial')
             ->when($this->studyMaterialId, function ($query): void {
                 $query->where('study_material_id', $this->studyMaterialId);
             })
-            ->orderBy($this->sortField ?: 'title', $this->sortAsc ? 'asc' : 'desc')
             ->paginate(self::PAGINATION);
 
         foreach ($rows as $row) {

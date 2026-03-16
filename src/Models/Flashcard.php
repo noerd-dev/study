@@ -8,23 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Noerd\Models\Tenant;
 use Noerd\Traits\BelongsToTenant;
-use Noerd\Traits\HasListScopes;
 use Nywerk\Study\Database\Factories\FlashcardFactory;
 
 class Flashcard extends Model
 {
     use BelongsToTenant;
     use HasFactory;
-    use HasListScopes;
 
     protected $table = 'study_flashcards';
 
     protected $guarded = [];
-
-    protected array $searchable = [
-        'question',
-        'answer',
-    ];
 
     public function tenant(): BelongsTo
     {

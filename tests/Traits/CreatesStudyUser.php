@@ -4,13 +4,13 @@ namespace Nywerk\Study\Tests\Traits;
 
 use Noerd\Helpers\TenantHelper;
 use Noerd\Models\Tenant;
-use Noerd\Models\User;
+use Noerd\Models\NoerdUser;
 
 trait CreatesStudyUser
 {
-    protected function withStudyModule(): User
+    protected function withStudyModule(): NoerdUser
     {
-        $user = User::factory()->create();
+        $user = NoerdUser::factory()->create();
         $tenant = Tenant::factory()->create();
         $user->tenants()->attach($tenant->id);
 

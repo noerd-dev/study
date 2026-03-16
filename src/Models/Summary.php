@@ -8,23 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Noerd\Models\Tenant;
 use Noerd\Traits\BelongsToTenant;
-use Noerd\Traits\HasListScopes;
 use Nywerk\Study\Database\Factories\SummaryFactory;
 
 class Summary extends Model
 {
     use BelongsToTenant;
     use HasFactory;
-    use HasListScopes;
 
     protected $table = 'study_summaries';
 
     protected $guarded = [];
-
-    protected array $searchable = [
-        'title',
-        'content',
-    ];
 
     public function tenant(): BelongsTo
     {

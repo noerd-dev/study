@@ -1,8 +1,11 @@
 title: study_label_study_materials
-newLabel: study_label_new_study_material
-component: study-material-detail
+searchableColumns:
+  - title
+  - author
+actions:
+  - label: study_label_new_study_material
+    action: listAction
 disableSearch: false
-redirectAction: ''
 columns:
   - field: title
     label: study_label_title

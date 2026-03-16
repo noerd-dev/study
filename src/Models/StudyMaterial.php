@@ -9,23 +9,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Noerd\Models\Tenant;
 use Noerd\Traits\BelongsToTenant;
-use Noerd\Traits\HasListScopes;
 use Nywerk\Study\Database\Factories\StudyMaterialFactory;
 
 class StudyMaterial extends Model
 {
     use BelongsToTenant;
     use HasFactory;
-    use HasListScopes;
 
     protected $table = 'study_materials';
 
     protected $guarded = [];
-
-    protected array $searchable = [
-        'title',
-        'author',
-    ];
 
     public function tenant(): BelongsTo
     {
