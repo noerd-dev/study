@@ -20,7 +20,7 @@ new class extends Component {
     public function with()
     {
         $rows = $this->listQuery(StudyMaterial::class)
-            ->paginate(self::PAGINATION);
+            ->paginate($this->perPage);
 
         return [
             'listConfig' => $this->buildList($rows),

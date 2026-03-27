@@ -29,7 +29,7 @@ new class extends Component {
                 $query->where('study_material_id', $this->studyMaterialId);
             })
             ->tap(fn ($query) => $this->applyListFilters($query))
-            ->paginate(self::PAGINATION);
+            ->paginate($this->perPage);
 
         foreach ($rows as $row) {
             $row->studyMaterial = $row->studyMaterial?->title;

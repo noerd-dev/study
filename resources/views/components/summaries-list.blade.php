@@ -26,7 +26,7 @@ new class extends Component {
             ->when($this->studyMaterialId, function ($query): void {
                 $query->where('study_material_id', $this->studyMaterialId);
             })
-            ->paginate(self::PAGINATION);
+            ->paginate($this->perPage);
 
         foreach ($rows as $row) {
             $row->studyMaterial = $row->studyMaterial?->title;
