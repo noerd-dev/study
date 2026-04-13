@@ -48,9 +48,9 @@ new class extends Component {
     @enderror
 
     <div class="mb-6">
-        <flux:button wire:click="generatePdf" variant="primary">
+        <x-noerd::button wire:click="generatePdf">
             {{ __('study_label_generate_pdf') }}
-        </flux:button>
+        </x-noerd::button>
         <span class="ml-4 text-sm text-gray-500">
             {{ count($selectedFlashcards) }} / 8 {{ __('study_label_flashcards') }}
         </span>
