@@ -3,16 +3,12 @@ description: ''
 fields:
   - name: detailData.study_material_id
     label: study_label_study_material
-    type: relation
+    type: studyMaterialRelation
     colspan: 6
-    relationField: relationTitles.study_material_id
-    modalComponent: study-materials-list
   - name: detailData.summary_id
     label: study_label_summary
-    type: relation
+    type: summaryRelation
     colspan: 6
-    relationField: relationTitles.summary_id
-    modalComponent: summaries-list
   - name: detailData.created_date
     label: study_label_created_date
     type: date

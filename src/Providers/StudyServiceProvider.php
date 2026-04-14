@@ -4,7 +4,11 @@ namespace Nywerk\Study\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
+use Noerd\Services\RelationFieldRegistry;
+use Noerd\Support\RelationFieldDefinition;
 use Nywerk\Study\Commands\StudyInstallCommand;
+use Nywerk\Study\Models\StudyMaterial;
+use Nywerk\Study\Models\Summary;
 use Nywerk\Study\Commands\StudyUpdateCommand;
 
 class StudyServiceProvider extends ServiceProvider
@@ -30,6 +34,20 @@ class StudyServiceProvider extends ServiceProvider
                 StudyUpdateCommand::class,
             ]);
         }
+
+        $relationFieldRegistry = $this->app->make(RelationFieldRegistry::class);
+        $relationFieldRegistry->register('studyMaterialRelation', RelationFieldDefinition::model(
+            listComponent: 'study-materials-list',
+            detailComponent: 'study-material-detail',
+            modelClass: StudyMaterial::class,
+            titleResolver: 'title',
+        ));
+        $relationFieldRegistry->register('summaryRelation', RelationFieldDefinition::model(
+            listComponent: 'summaries-list',
+            detailComponent: 'summary-detail',
+            modelClass: Summary::class,
+            titleResolver: 'title',
+        ));
     }
 
     private function ensureFontsDirectoryExists(): void

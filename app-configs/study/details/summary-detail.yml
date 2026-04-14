@@ -8,10 +8,8 @@ fields:
     required: true
   - name: detailData.study_material_id
     label: study_label_study_material
-    type: relation
+    type: studyMaterialRelation
     colspan: 12
-    relationField: relationTitles.study_material_id
-    modalComponent: study-materials-list
   - name: detailData.content
     label: study_label_content
     type: richText
