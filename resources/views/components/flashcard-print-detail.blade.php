@@ -9,13 +9,13 @@ new class extends Component {
     public function generatePdf(): void
     {
         if (empty($this->selectedFlashcards)) {
-            $this->addError('selection', __('study_label_no_flashcards_selected'));
+            $this->addError('selection', __('Please select at least one flashcard.'));
 
             return;
         }
 
         if (count($this->selectedFlashcards) > 8) {
-            $this->addError('selection', __('study_label_max_flashcards'));
+            $this->addError('selection', __('Maximum 8 flashcards can be selected.'));
 
             return;
         }
@@ -37,8 +37,8 @@ new class extends Component {
 
 <div class="p-6">
     <div class="mb-6">
-        <h1 class="text-2xl font-semibold text-gray-900">{{ __('study_label_print_flashcards') }}</h1>
-        <p class="mt-2 text-sm text-gray-600">{{ __('study_label_select_flashcards') }}</p>
+        <h1 class="text-2xl font-semibold text-gray-900">{{ __('Print Flashcards') }}</h1>
+        <p class="mt-2 text-sm text-gray-600">{{ __('Select flashcards (max. 8)') }}</p>
     </div>
 
     @error('selection')
@@ -49,10 +49,10 @@ new class extends Component {
 
     <div class="mb-6">
         <x-noerd::button wire:click="generatePdf">
-            {{ __('study_label_generate_pdf') }}
+            {{ __('Generate PDF') }}
         </x-noerd::button>
         <span class="ml-4 text-sm text-gray-500">
-            {{ count($selectedFlashcards) }} / 8 {{ __('study_label_flashcards') }}
+            {{ count($selectedFlashcards) }} / 8 {{ __('Flashcards') }}
         </span>
     </div>
 
@@ -82,7 +82,7 @@ new class extends Component {
 
     @if($flashcards->isEmpty())
         <div class="text-center py-12">
-            <p class="text-gray-500">{{ __('study_label_flashcards') }}: 0</p>
+            <p class="text-gray-500">{{ __('Flashcards') }}: 0</p>
         </div>
     @endif
 </div>

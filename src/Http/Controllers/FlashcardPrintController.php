@@ -17,7 +17,7 @@ class FlashcardPrintController extends Controller
         $flashcardIds = $request->input('flashcard_ids', []);
 
         if (empty($flashcardIds)) {
-            return back()->withErrors(['selection' => __('study_label_no_flashcards_selected')]);
+            return back()->withErrors(['selection' => __('Please select at least one flashcard.')]);
         }
 
         $flashcards = Flashcard::whereIn('id', $flashcardIds)
@@ -27,7 +27,7 @@ class FlashcardPrintController extends Controller
             ->get();
 
         if ($flashcards->isEmpty()) {
-            return back()->withErrors(['selection' => __('study_label_no_flashcards_selected')]);
+            return back()->withErrors(['selection' => __('Please select at least one flashcard.')]);
         }
 
         $pdf = PDF::loadView('study::pdf.flashcards', ['flashcards' => $flashcards])

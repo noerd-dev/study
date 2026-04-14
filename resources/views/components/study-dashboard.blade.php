@@ -32,16 +32,16 @@ new class () extends Component {
     <div class="my-12">
         <div class="mb-12">
             <div class="font-semibold text-sm border-b border-gray-300 pb-2">
-                {{ __('study_dashboard_overview') }}
+                {{ __('Overview') }}
             </div>
             <div class="flex">
-                <x-noerd::dashboard-card heroicon="book-open" :title="__('study_label_study_materials')"
+                <x-noerd::dashboard-card heroicon="book-open" :title="__('Study Materials')"
                                         :value="$studyMaterialsCount"
                                         component="study-materials-list"/>
-                <x-noerd::dashboard-card heroicon="document-text" :title="__('study_label_summaries')"
+                <x-noerd::dashboard-card heroicon="document-text" :title="__('Summaries')"
                                         :value="$summariesCount"
                                         component="summaries-list"/>
-                <x-noerd::dashboard-card heroicon="rectangle-stack" :title="__('study_label_flashcards')"
+                <x-noerd::dashboard-card heroicon="rectangle-stack" :title="__('Flashcards')"
                                         :value="$flashcardsCount"
                                         component="flashcards-list"/>
             </div>
@@ -49,14 +49,14 @@ new class () extends Component {
 
         <div class="mb-12">
             <div class="font-semibold text-sm border-b border-gray-300 pb-2">
-                {{ __('study_dashboard_create') }}
+                {{ __('Create') }}
             </div>
             <div class="flex">
-                <x-noerd::dashboard-card heroicon="book-open" :title="__('study_label_new_study_material')"
+                <x-noerd::dashboard-card heroicon="book-open" :title="__('New Study Material')"
                                         component="study-material-detail"/>
-                <x-noerd::dashboard-card heroicon="document-text" :title="__('study_label_new_summary')"
+                <x-noerd::dashboard-card heroicon="document-text" :title="__('New Summary')"
                                         component="summary-detail"/>
-                <x-noerd::dashboard-card heroicon="rectangle-stack" :title="__('study_label_new_flashcard')"
+                <x-noerd::dashboard-card heroicon="rectangle-stack" :title="__('New Flashcard')"
                                         component="flashcard-detail"/>
             </div>
         </div>

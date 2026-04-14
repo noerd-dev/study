@@ -8,11 +8,11 @@ trait StudyMaterialFilterTrait
 {
     protected function getStudyMaterialsListFilter(): array
     {
-        $filter['label'] = __('study_label_study_material');
+        $filter['label'] = __('Study Material');
         $filter['column'] = 'study_material_id';
         $filter['type'] = 'Picklist';
         $filter['options'] = [
-            null => __('study_label_all_study_materials'),
+            null => __('All Study Materials'),
         ];
 
         $options = StudyMaterial::orderBy('title', 'asc')->get()

@@ -116,7 +116,7 @@
             page-break-after: always;
         }
     </style>
-    <title>{{ __('study_label_flashcards') }}</title>
+    <title>{{ __('Flashcards') }}</title>
 </head>
 
 <body>
@@ -149,7 +149,7 @@
                                 <span class="card-number">
                                     {{ $flashcard->studyMaterial?->title ?? '-' }}@if($flashcard->summary) | {{ $flashcard->summary->title }}@endif
                                 </span>
-                                <span class="card-label">{{ __('study_label_question') }}</span>
+                                <span class="card-label">{{ __('Question') }}</span>
                             </div>
                             <div class="card-content">
                                 {{ $flashcard->question }}
@@ -163,7 +163,7 @@
                                 <span class="card-number">
                                     {{ $flashcard->studyMaterial?->title ?? '-' }}@if($flashcard->summary) | {{ $flashcard->summary->title }}@endif
                                 </span>
-                                <span class="card-label">{{ __('study_label_answer') }}</span>
+                                <span class="card-label">{{ __('Answer') }}</span>
                             </div>
                             <div class="card-content">
                                 @if($flashcard->answer)

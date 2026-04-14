@@ -38,7 +38,7 @@ new class extends Component {
 
 <x-noerd::page :disableModal="$disableModal">
     <x-slot:header>
-        <x-noerd::modal-title>{{ __('study_study_material') }}</x-noerd::modal-title>
+        <x-noerd::modal-title>{{ __('Study Material') }}</x-noerd::modal-title>
     </x-slot:header>
 
     <x-noerd::tab-content :layout="$pageLayout" :modelId="$modelId" />

@@ -1,17 +1,17 @@
-title: study_label_summary
+title: Summary
 description: ''
 fields:
   - name: detailData.title
-    label: study_label_title
+    label: Title
     type: text
     colspan: 12
     required: true
   - name: detailData.study_material_id
-    label: study_label_study_material
+    label: Study Material
     type: studyMaterialRelation
     colspan: 12
   - name: detailData.content
-    label: study_label_content
+    label: Content
     type: richText
     colspan: 12
     rows: 15
