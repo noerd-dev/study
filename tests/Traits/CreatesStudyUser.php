@@ -3,8 +3,8 @@
 namespace Nywerk\Study\Tests\Traits;
 
 use Noerd\Helpers\TenantHelper;
-use Noerd\Models\Tenant;
 use Noerd\Models\NoerdUser;
+use Noerd\Models\Tenant;
 
 trait CreatesStudyUser
 {
