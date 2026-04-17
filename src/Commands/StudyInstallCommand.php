@@ -58,11 +58,6 @@ class StudyInstallCommand extends Command
         return dirname(__DIR__, 2) . '/app-configs/study';
     }
 
-    protected function getSnippetTitle(): string
-    {
-        return 'Study';
-    }
-
     /**
      * @return array<string>
      */
