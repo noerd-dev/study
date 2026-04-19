@@ -15,7 +15,7 @@ new class extends Component {
     {
         $this->dispatch(
             event: 'noerdModal',
-            modalComponent: 'flashcard-detail',
+            modalComponent: 'study::flashcard-detail',
             source: $this->getComponentName(),
             arguments: ['modelId' => $modelId, 'relations' => $this->studyMaterialId ? ['study_material_id' => $this->studyMaterialId] : $relations],
         );

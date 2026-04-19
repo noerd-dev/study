@@ -12,7 +12,7 @@ columns:
   - field: studyMaterial
     label: Book
     type: relation_link
-    modalComponent: study-material-detail
+    modalComponent: study::study-material-detail
     idField: study_material_id
     idParam: modelId
   - field: created_at

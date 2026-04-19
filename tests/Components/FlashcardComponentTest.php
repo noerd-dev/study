@@ -9,8 +9,8 @@ uses(Tests\TestCase::class, RefreshDatabase::class);
 uses(CreatesStudyUser::class);
 
 $testSettings = [
-    'componentName' => 'flashcard-detail',
-    'listName' => 'flashcards-list',
+    'componentName' => 'study::flashcard-detail',
+    'listName' => 'study::flashcards-list',
     'id' => 'modelId',
     'urlParam' => 'flashcardId',
 ];

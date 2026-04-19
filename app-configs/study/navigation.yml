@@ -11,15 +11,15 @@
         - title: Study Materials
           route: study.study-materials
           heroicon: book-open
-          newComponent: study-material-detail
+          newComponent: study::study-material-detail
         - title: Summaries
           route: study.summaries
           heroicon: document-text
-          newComponent: summary-detail
+          newComponent: study::summary-detail
         - title: Flashcards
           route: study.flashcards
           heroicon: rectangle-stack
-          newComponent: flashcard-detail
+          newComponent: study::flashcard-detail
         - title: Print Flashcards
           route: study.flashcards-print
           heroicon: printer

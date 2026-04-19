@@ -16,7 +16,7 @@ beforeEach(function (): void {
 it('can set listFilters for study_material_id without error', function (): void {
     $studyMaterial = StudyMaterial::factory()->create(['tenant_id' => $this->user->selected_tenant_id]);
 
-    Livewire::test('flashcards-list')
+    Livewire::test('study::flashcards-list')
         ->set('listFilters.study_material_id', $studyMaterial->id)
         ->assertHasNoErrors();
 });
@@ -34,7 +34,7 @@ it('applies study material filter to query results', function (): void {
         'tenant_id' => $this->user->selected_tenant_id,
     ]);
 
-    $component = Livewire::test('flashcards-list')
+    $component = Livewire::test('study::flashcards-list')
         ->set('listFilters.study_material_id', $studyMaterial1->id);
 
     $rows = $component->viewData('listConfig')['rows'];

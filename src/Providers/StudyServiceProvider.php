@@ -22,6 +22,7 @@ class StudyServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'study');
+        Livewire::addNamespace('study', viewPath: __DIR__ . '/../../resources/views/components');
         Livewire::addLocation(viewPath: __DIR__ . '/../../resources/views/components');
         $this->loadJsonTranslationsFrom(__DIR__ . '/../../resources/lang');
         $this->loadRoutesFrom(__DIR__ . '/../../routes/study-routes.php');
@@ -37,14 +38,14 @@ class StudyServiceProvider extends ServiceProvider
 
         $relationFieldRegistry = $this->app->make(RelationFieldRegistry::class);
         $relationFieldRegistry->register('studyMaterialRelation', RelationFieldDefinition::model(
-            listComponent: 'study-materials-list',
-            detailComponent: 'study-material-detail',
+            listComponent: 'study::study-materials-list',
+            detailComponent: 'study::study-material-detail',
             modelClass: StudyMaterial::class,
             titleResolver: 'title',
         ));
         $relationFieldRegistry->register('summaryRelation', RelationFieldDefinition::model(
-            listComponent: 'summaries-list',
-            detailComponent: 'summary-detail',
+            listComponent: 'study::summaries-list',
+            detailComponent: 'study::summary-detail',
             modelClass: Summary::class,
             titleResolver: 'title',
         ));

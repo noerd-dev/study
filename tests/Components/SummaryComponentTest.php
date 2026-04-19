@@ -10,8 +10,8 @@ uses(Tests\TestCase::class, RefreshDatabase::class);
 uses(CreatesStudyUser::class);
 
 $testSettings = [
-    'componentName' => 'summary-detail',
-    'listName' => 'summaries-list',
+    'componentName' => 'study::summary-detail',
+    'listName' => 'study::summaries-list',
     'id' => 'modelId',
     'urlParam' => 'summaryId',
 ];

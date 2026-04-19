@@ -13,7 +13,7 @@ new class extends Component {
     {
         $this->dispatch(
             event: 'noerdModal',
-            modalComponent: 'summary-detail',
+            modalComponent: 'study::summary-detail',
             source: $this->getComponentName(),
             arguments: ['modelId' => $modelId, 'relations' => $this->studyMaterialId ? ['study_material_id' => $this->studyMaterialId] : $relations],
         );

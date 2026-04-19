@@ -12,13 +12,13 @@ columns:
   - field: studyMaterial
     label: Book
     type: relation_link
-    modalComponent: study-material-detail
+    modalComponent: study::study-material-detail
     idField: study_material_id
     idParam: modelId
   - field: summary
     label: Summary
     type: relation_link
-    modalComponent: summary-detail
+    modalComponent: study::summary-detail
     idField: summary_id
     idParam: modelId
   - field: created_date

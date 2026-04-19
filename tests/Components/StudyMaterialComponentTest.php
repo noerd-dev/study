@@ -8,8 +8,8 @@ uses(Tests\TestCase::class, RefreshDatabase::class);
 uses(CreatesStudyUser::class);
 
 $testSettings = [
-    'componentName' => 'study-material-detail',
-    'listName' => 'study-materials-list',
+    'componentName' => 'study::study-material-detail',
+    'listName' => 'study::study-materials-list',
     'id' => 'modelId',
     'urlParam' => 'studyMaterialId',
 ];

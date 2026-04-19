@@ -31,7 +31,7 @@ it('displays flashcards on the print page', function (): void {
 
     $this->actingAs($user);
 
-    Livewire::test('flashcard-print-detail')
+    Livewire::test('study::flashcard-print-detail')
         ->assertSee('Test Question');
 });
 
@@ -45,7 +45,7 @@ it('can select flashcards', function (): void {
 
     $this->actingAs($user);
 
-    Livewire::test('flashcard-print-detail')
+    Livewire::test('study::flashcard-print-detail')
         ->set('selectedFlashcards', [$flashcard->id])
         ->assertSet('selectedFlashcards', [$flashcard->id]);
 });
@@ -55,7 +55,7 @@ it('validates at least one flashcard is selected', function (): void {
 
     $this->actingAs($user);
 
-    Livewire::test('flashcard-print-detail')
+    Livewire::test('study::flashcard-print-detail')
         ->call('generatePdf')
         ->assertHasErrors(['selection']);
 });
@@ -70,7 +70,7 @@ it('validates maximum 8 flashcards', function (): void {
 
     $this->actingAs($user);
 
-    Livewire::test('flashcard-print-detail')
+    Livewire::test('study::flashcard-print-detail')
         ->set('selectedFlashcards', $flashcards->pluck('id')->toArray())
         ->call('generatePdf')
         ->assertHasErrors(['selection']);
@@ -86,7 +86,7 @@ it('redirects to pdf route with valid selection', function (): void {
 
     $this->actingAs($user);
 
-    Livewire::test('flashcard-print-detail')
+    Livewire::test('study::flashcard-print-detail')
         ->set('selectedFlashcards', [$flashcard->id])
         ->call('generatePdf')
         ->assertHasNoErrors()

@@ -23,7 +23,7 @@ it('loads study-material-detail via direct route', function (): void {
 
     $this->get('/study/study-material/' . $studyMaterial->id)
         ->assertSuccessful()
-        ->assertSeeLivewire('study-material-detail');
+        ->assertSeeLivewire('study::study-material-detail');
 });
 
 it('loads summary-detail via direct route', function (): void {
@@ -38,7 +38,7 @@ it('loads summary-detail via direct route', function (): void {
 
     $this->get('/study/summary/' . $summary->id)
         ->assertSuccessful()
-        ->assertSeeLivewire('summary-detail');
+        ->assertSeeLivewire('study::summary-detail');
 });
 
 it('loads flashcard-detail via direct route', function (): void {
@@ -53,5 +53,5 @@ it('loads flashcard-detail via direct route', function (): void {
 
     $this->get('/study/flashcard/' . $flashcard->id)
         ->assertSuccessful()
-        ->assertSeeLivewire('flashcard-detail');
+        ->assertSeeLivewire('study::flashcard-detail');
 });
