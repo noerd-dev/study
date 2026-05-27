@@ -1,6 +1,7 @@
 <?php
 
 use Livewire\Component;
+use Noerd\Facades\Noerd;
 use Noerd\Traits\NoerdList;
 use Nywerk\Study\Models\StudyMaterial;
 
@@ -9,15 +10,10 @@ new class extends Component {
 
     public function listAction(mixed $modelId = null, array $relations = []): void
     {
-        $this->dispatch(
-            event: 'noerdModal',
-            modalComponent: 'study::study-material-detail',
-            source: $this->getComponentName(),
-            arguments: ['modelId' => $modelId, 'relations' => $relations],
-        );
+        Noerd::modal('study::study-material-detail', ['modelId' => $modelId, 'relations' => $relations]);
     }
 
-    public function with()
+    public function with(): array
     {
         $rows = $this->listQuery(StudyMaterial::class)
             ->paginate($this->perPage);

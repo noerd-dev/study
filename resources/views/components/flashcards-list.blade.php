@@ -1,6 +1,7 @@
 <?php
 
 use Livewire\Component;
+use Noerd\Facades\Noerd;
 use Noerd\Traits\NoerdList;
 use Nywerk\Study\Models\Flashcard;
 use Nywerk\Study\Traits\StudyMaterialFilterTrait;
@@ -13,15 +14,10 @@ new class extends Component {
 
     public function listAction(mixed $modelId = null, array $relations = []): void
     {
-        $this->dispatch(
-            event: 'noerdModal',
-            modalComponent: 'study::flashcard-detail',
-            source: $this->getComponentName(),
-            arguments: ['modelId' => $modelId, 'relations' => $this->studyMaterialId ? ['study_material_id' => $this->studyMaterialId] : $relations],
-        );
+        Noerd::modal('study::flashcard-detail', ['modelId' => $modelId, 'relations' => $this->studyMaterialId ? ['study_material_id' => $this->studyMaterialId] : $relations]);
     }
 
-    public function with()
+    public function with(): array
     {
         $rows = $this->listQuery(Flashcard::class)
             ->with('studyMaterial', 'summary')
