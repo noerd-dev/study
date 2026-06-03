@@ -28,6 +28,8 @@ new class extends Component {
         if ($this->detailData['study_material_id'] ?? null) {
             $this->relationTitles['study_material_id'] = StudyMaterial::find($this->detailData['study_material_id'])?->title;
         }
+
+        $this->preselect('study_material_id');
     }
 
     #[On('studyMaterialSelected')]
