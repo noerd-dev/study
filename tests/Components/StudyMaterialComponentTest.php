@@ -28,9 +28,11 @@ it('validates required fields via layout', function () use ($testSettings): void
 
     $this->actingAs($user);
 
-    Livewire::test($testSettings['componentName'])
-        ->call('store')
-        ->assertHasErrors(['detailData.title']);
+    $component = Livewire::test($testSettings['componentName'])
+        ->set('detailData', [])
+        ->call('store');
+
+    $component->assertHasErrors(requiredLayoutFields($component));
 });
 
 it('successfully stores the data', function () use ($testSettings): void {
@@ -40,6 +42,7 @@ it('successfully stores the data', function () use ($testSettings): void {
     $title = fake()->sentence(3);
 
     Livewire::test($testSettings['componentName'])
+        ->set('detailData', validDetailPayload(StudyMaterial::class, ['tenant_id' => $user->selected_tenant_id]))
         ->set('detailData.title', $title)
         ->set('detailData.author', 'Test Author')
         ->call('store')
