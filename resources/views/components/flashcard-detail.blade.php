@@ -14,7 +14,7 @@ new class extends Component {
     #[Url(as: 'flashcardId', keep: false, except: '')]
     public $modelId = null;
 
-    public const DETAIL_CLASS = Flashcard::class;
+    public $detailModel = Flashcard::class;
 
     public array $relations = [];
 
@@ -69,11 +69,6 @@ new class extends Component {
         $this->storeProcess($flashcard);
     }
 
-    public function delete(): void
-    {
-        Flashcard::find($this->modelId)->delete();
-        $this->closeModalProcess($this->getListComponent());
-    }
 }; ?>
 
 <x-noerd::page>

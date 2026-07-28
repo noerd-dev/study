@@ -11,7 +11,7 @@ new class extends Component {
     #[Url(as: 'studyMaterialId', keep: false, except: '')]
     public $modelId = null;
 
-    public const DETAIL_CLASS = StudyMaterial::class;
+    public $detailModel = StudyMaterial::class;
 
     public function mount(): void
     {
@@ -20,20 +20,6 @@ new class extends Component {
         $this->setPreselect('study_material_id', $this->modelId);
     }
 
-    public function store(): void
-    {
-        $this->validateFromLayout();
-
-        $studyMaterial = StudyMaterial::updateOrCreate(['id' => $this->modelId], $this->detailData);
-
-        $this->storeProcess($studyMaterial);
-    }
-
-    public function delete(): void
-    {
-        StudyMaterial::find($this->modelId)->delete();
-        $this->closeModalProcess($this->getListComponent());
-    }
 }; ?>
 
 <x-noerd::page>

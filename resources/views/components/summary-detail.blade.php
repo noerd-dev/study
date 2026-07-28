@@ -13,7 +13,7 @@ new class extends Component {
     #[Url(as: 'summaryId', keep: false, except: '')]
     public $modelId = null;
 
-    public const DETAIL_CLASS = Summary::class;
+    public $detailModel = Summary::class;
 
     public array $relations = [];
 
@@ -52,11 +52,6 @@ new class extends Component {
         $this->storeProcess($summary);
     }
 
-    public function delete(): void
-    {
-        Summary::find($this->modelId)->delete();
-        $this->closeModalProcess($this->getListComponent());
-    }
 }; ?>
 
 <x-noerd::page>

@@ -5,7 +5,7 @@
 	"version": "v0.2.0",
 	"license": "proprietary",
     "require": {
-        "noerd/noerd": "^0.7.2",
+        "noerd/noerd": "^0.8",
         "barryvdh/laravel-dompdf": "^3.1"
     },
 	"autoload": {
