@@ -8,6 +8,9 @@ use Nywerk\Study\Models\Summary;
 new class extends Component {
     use NoerdList;
 
+    public $listModel = Summary::class;
+    public $detailComponent = 'study::summary-detail';
+
     public ?int $studyMaterialId = null;
 
     public function listAction(mixed $modelId = null, array $relations = []): void
@@ -15,9 +18,9 @@ new class extends Component {
         Noerd::modal('study::summary-detail', ['modelId' => $modelId, 'relations' => $this->studyMaterialId ? ['study_material_id' => $this->studyMaterialId] : $relations]);
     }
 
-    public function with(): array
+    public function listData(): array
     {
-        $rows = $this->listQuery(Summary::class)
+        $rows = $this->listQuery($this->listModel)
             ->with('studyMaterial')
             ->when($this->studyMaterialId, function ($query): void {
                 $query->where('study_material_id', $this->studyMaterialId);
@@ -28,9 +31,7 @@ new class extends Component {
             $row->studyMaterial = $row->studyMaterial?->title;
         }
 
-        return [
-            'listConfig' => $this->buildList($rows),
-        ];
+        return $this->buildList($rows);
     }
 
     public function rendering()

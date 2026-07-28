@@ -34,10 +34,11 @@ it('applies study material filter to query results', function (): void {
         'tenant_id' => $this->user->selected_tenant_id,
     ]);
 
-    $component = Livewire::test('study::flashcards-list')
-        ->set('listFilters.study_material_id', $studyMaterial1->id);
+    session(['listFilters' => ['study_material_id' => $studyMaterial1->id]]);
 
-    $rows = $component->viewData('listConfig')['rows'];
+    $component = Livewire::test('study::flashcards-list');
+
+    $rows = $component->instance()->listData()['rows'];
 
     expect($rows)->toHaveCount(1);
     expect($rows->first()->study_material_id)->toBe($studyMaterial1->id);

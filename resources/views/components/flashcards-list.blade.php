@@ -10,6 +10,9 @@ new class extends Component {
     use NoerdList;
     use StudyMaterialFilterTrait;
 
+    public $listModel = Flashcard::class;
+    public $detailComponent = 'study::flashcard-detail';
+
     public ?int $studyMaterialId = null;
 
     public function listAction(mixed $modelId = null, array $relations = []): void
@@ -17,9 +20,9 @@ new class extends Component {
         Noerd::modal('study::flashcard-detail', ['modelId' => $modelId, 'relations' => $this->studyMaterialId ? ['study_material_id' => $this->studyMaterialId] : $relations]);
     }
 
-    public function with(): array
+    public function listData(): array
     {
-        $rows = $this->listQuery(Flashcard::class)
+        $rows = $this->listQuery($this->listModel)
             ->with('studyMaterial', 'summary')
             ->when($this->studyMaterialId, function ($query): void {
                 $query->where('study_material_id', $this->studyMaterialId);
@@ -32,9 +35,7 @@ new class extends Component {
             $row->summary = $row->summary?->title;
         }
 
-        return [
-            'listConfig' => $this->buildList($rows),
-        ];
+        return $this->buildList($rows);
     }
 
     public function rendering()

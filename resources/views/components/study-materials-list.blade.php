@@ -1,27 +1,14 @@
 <?php
 
 use Livewire\Component;
-use Noerd\Facades\Noerd;
 use Noerd\Traits\NoerdList;
 use Nywerk\Study\Models\StudyMaterial;
 
 new class extends Component {
     use NoerdList;
 
-    public function listAction(mixed $modelId = null, array $relations = []): void
-    {
-        Noerd::modal('study::study-material-detail', ['modelId' => $modelId, 'relations' => $relations]);
-    }
-
-    public function with(): array
-    {
-        $rows = $this->listQuery(StudyMaterial::class)
-            ->paginate($this->perPage);
-
-        return [
-            'listConfig' => $this->buildList($rows),
-        ];
-    }
+    public $listModel = StudyMaterial::class;
+    public $detailComponent = 'study::study-material-detail';
 
     public function rendering()
     {
