@@ -28,7 +28,7 @@ new class () extends Component {
     }
 } ?>
 
-<x-noerd::page :disableModal="$disableModal">
+<x-noerd::page>
     <div class="my-12">
         <div class="mb-12">
             <div class="font-semibold text-sm border-b border-gray-300 pb-2">

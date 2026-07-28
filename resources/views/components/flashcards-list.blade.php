@@ -51,6 +51,6 @@ new class extends Component {
     }
 }; ?>
 
-<x-noerd::page :disableModal="$disableModal">
+<x-noerd::page>
     <x-noerd::list :relations="$studyMaterialId ? ['study_material_id' => $studyMaterialId] : []" />
 </x-noerd::page>
