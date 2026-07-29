@@ -7,9 +7,9 @@ use Livewire\Livewire;
 use Noerd\Services\RelationFieldRegistry;
 use Noerd\Support\RelationFieldDefinition;
 use Nywerk\Study\Commands\StudyInstallCommand;
+use Nywerk\Study\Commands\StudyUpdateCommand;
 use Nywerk\Study\Models\StudyMaterial;
 use Nywerk\Study\Models\Summary;
-use Nywerk\Study\Commands\StudyUpdateCommand;
 
 class StudyServiceProvider extends ServiceProvider
 {
