@@ -11,6 +11,6 @@ Route::group(['middleware' => ['web', 'auth', 'verified']], function (): void {
     Route::livewire('study/summary/{modelId}', 'study::summary-detail')->name('study.summary.detail');
     Route::livewire('study/flashcards', 'study::flashcards-list')->name('study.flashcards');
     Route::livewire('study/flashcard/{modelId}', 'study::flashcard-detail')->name('study.flashcard.detail');
-    Route::livewire('study/flashcards-print', 'study::flashcard-print-detail')->name('study.flashcards-print');
+    Route::livewire('study/flashcards-print', 'study::flashcard-print-page')->name('study.flashcards-print');
     Route::get('study/flashcards-print/pdf', [FlashcardPrintController::class, 'print'])->name('study.flashcards-print.pdf');
 });
