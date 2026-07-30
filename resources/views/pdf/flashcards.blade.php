@@ -1,7 +1,7 @@
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <style>
         @page {
             margin: 0;
@@ -56,7 +56,7 @@
         /* 4 rows: 4 x 70mm = 280mm (safe within 297mm) */
         .card {
             width: 105mm;
-            height:65.75mm;
+            height: 65.75mm;
             border: 1px dashed #999;
             padding: 4mm;
             vertical-align: top;
@@ -134,39 +134,39 @@
         $paddedFlashcards = collect($paddedFlashcards);
     @endphp
 
-    @foreach($paddedFlashcards->chunk(4) as $chunkIndex => $chunkCards)
+    @foreach ($paddedFlashcards->chunk(4) as $chunkIndex => $chunkCards)
         <table class="card-table">
             <colgroup>
-                <col style="width: 105mm;">
-                <col style="width: 105mm;">
+                <col style="width: 105mm" />
+                <col style="width: 105mm" />
             </colgroup>
-            @foreach($chunkCards as $cardIndex => $flashcard)
+            @foreach ($chunkCards as $cardIndex => $flashcard)
                 <tr>
                     {{-- Question (left cell) --}}
                     <td class="card card-question">
-                        @if($flashcard)
+                        @if ($flashcard)
                             <div class="card-header">
                                 <span class="card-number">
-                                    {{ $flashcard->studyMaterial?->title ?? '-' }}@if($flashcard->summary) | {{ $flashcard->summary->title }}@endif
+                                    {{ $flashcard->studyMaterial?->title ?? '-' }}
+                                    @if ($flashcard->summary) |{{ $flashcard->summary->title }}@endif
                                 </span>
                                 <span class="card-label">{{ __('Question') }}</span>
                             </div>
-                            <div class="card-content">
-                                {{ $flashcard->question }}
-                            </div>
+                            <div class="card-content">{{ $flashcard->question }}</div>
                         @endif
                     </td>
                     {{-- Answer (right cell) --}}
                     <td class="card card-answer">
-                        @if($flashcard)
+                        @if ($flashcard)
                             <div class="card-header">
                                 <span class="card-number">
-                                    {{ $flashcard->studyMaterial?->title ?? '-' }}@if($flashcard->summary) | {{ $flashcard->summary->title }}@endif
+                                    {{ $flashcard->studyMaterial?->title ?? '-' }}
+                                    @if ($flashcard->summary) |{{ $flashcard->summary->title }}@endif
                                 </span>
                                 <span class="card-label">{{ __('Answer') }}</span>
                             </div>
                             <div class="card-content">
-                                @if($flashcard->answer)
+                                @if ($flashcard->answer)
                                     {!! \Illuminate\Support\Str::markdown($flashcard->answer) !!}
                                 @else
                                     <em>-</em>
@@ -177,7 +177,7 @@
                 </tr>
             @endforeach
         </table>
-        @if(!$loop->last)
+        @if (!$loop->last)
             <div class="page-break"></div>
         @endif
     @endforeach
