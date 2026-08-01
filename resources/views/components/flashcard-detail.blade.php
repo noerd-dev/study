@@ -1,7 +1,6 @@
 <?php
 
 use Livewire\Attributes\On;
-use Livewire\Attributes\Url;
 use Livewire\Component;
 use Noerd\Traits\NoerdDetail;
 use Nywerk\Study\Models\Flashcard;
@@ -11,8 +10,7 @@ use Nywerk\Study\Models\Summary;
 new class extends Component {
     use NoerdDetail;
 
-    #[Url(as: 'flashcardId', keep: false, except: '')]
-    public $modelId = null;
+    public ?string $detailPrimary = 'flashcardId';
 
     public $detailModel = Flashcard::class;
 

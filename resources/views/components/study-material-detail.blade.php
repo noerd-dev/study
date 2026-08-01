@@ -1,6 +1,5 @@
 <?php
 
-use Livewire\Attributes\Url;
 use Livewire\Component;
 use Noerd\Traits\NoerdDetail;
 use Nywerk\Study\Models\StudyMaterial;
@@ -8,8 +7,7 @@ use Nywerk\Study\Models\StudyMaterial;
 new class extends Component {
     use NoerdDetail;
 
-    #[Url(as: 'studyMaterialId', keep: false, except: '')]
-    public $modelId = null;
+    public ?string $detailPrimary = 'studyMaterialId';
 
     public $detailModel = StudyMaterial::class;
 
