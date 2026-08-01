@@ -53,10 +53,13 @@ new class () extends Component {
             </div>
             <div class="flex">
                 <x-noerd::dashboard-card heroicon="book-open" :title="__('New Study Material')"
+                                        route="study.study-material.detail"
                                         component="study-material-detail"/>
                 <x-noerd::dashboard-card heroicon="document-text" :title="__('New Summary')"
+                                        route="study.summary.detail"
                                         component="summary-detail"/>
                 <x-noerd::dashboard-card heroicon="rectangle-stack" :title="__('New Flashcard')"
+                                        route="study.flashcard.detail"
                                         component="flashcard-detail"/>
             </div>
         </div>

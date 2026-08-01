@@ -9,13 +9,13 @@ new class extends Component {
     use NoerdList;
 
     public $listModel = Summary::class;
-    public $detailComponent = 'study::summary-detail';
+    public ?string $detailRoute = 'study.summary.detail';
 
     public ?int $studyMaterialId = null;
 
     public function listAction(mixed $modelId = null, array $relations = []): void
     {
-        Noerd::modal('study::summary-detail', ['modelId' => $modelId, 'relations' => $this->studyMaterialId ? ['study_material_id' => $this->studyMaterialId] : $relations]);
+        Noerd::modalFor('study.summary.detail', 'study::summary-detail', ['modelId' => $modelId, 'relations' => $this->studyMaterialId ? ['study_material_id' => $this->studyMaterialId] : $relations]);
     }
 
     public function listData(): array

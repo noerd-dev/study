@@ -8,7 +8,7 @@ new class extends Component {
     use NoerdList;
 
     public $listModel = StudyMaterial::class;
-    public $detailComponent = 'study::study-material-detail';
+    public ?string $detailRoute = 'study.study-material.detail';
 
     public function rendering()
     {

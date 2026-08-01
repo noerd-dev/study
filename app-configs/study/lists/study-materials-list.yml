@@ -4,7 +4,7 @@ searchableColumns:
   - author
 actions:
   - label: New Study Material
-    action: listAction
+    route: study.study-material.detail
 disableSearch: false
 columns:
   - field: title

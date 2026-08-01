@@ -11,13 +11,13 @@ new class extends Component {
     use StudyMaterialFilterTrait;
 
     public $listModel = Flashcard::class;
-    public $detailComponent = 'study::flashcard-detail';
+    public ?string $detailRoute = 'study.flashcard.detail';
 
     public ?int $studyMaterialId = null;
 
     public function listAction(mixed $modelId = null, array $relations = []): void
     {
-        Noerd::modal('study::flashcard-detail', ['modelId' => $modelId, 'relations' => $this->studyMaterialId ? ['study_material_id' => $this->studyMaterialId] : $relations]);
+        Noerd::modalFor('study.flashcard.detail', 'study::flashcard-detail', ['modelId' => $modelId, 'relations' => $this->studyMaterialId ? ['study_material_id' => $this->studyMaterialId] : $relations]);
     }
 
     public function listData(): array

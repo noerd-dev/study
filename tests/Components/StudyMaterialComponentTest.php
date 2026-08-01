@@ -3,12 +3,14 @@
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Nywerk\Study\Models\StudyMaterial;
 use Nywerk\Study\Tests\Traits\CreatesStudyUser;
+use Tests\TestCase;
 
-uses(Tests\TestCase::class, RefreshDatabase::class);
+uses(TestCase::class, RefreshDatabase::class);
 uses(CreatesStudyUser::class);
 
 $testSettings = [
     'componentName' => 'study::study-material-detail',
+    'detailRoute' => 'study.study-material.detail',
     'listName' => 'study::study-materials-list',
     'id' => 'modelId',
     'urlParam' => 'studyMaterialId',
@@ -61,7 +63,10 @@ it('sets and removes the model id in url', function () use ($testSettings): void
     $model = StudyMaterial::factory()->create(['tenant_id' => $user->selected_tenant_id]);
 
     Livewire::test($testSettings['listName'])->call('listAction', $model->id)
-        ->assertDispatched('noerdModal', modalComponent: $testSettings['componentName']);
+        ->assertDispatched(
+            'noerdModal',
+            fn (string $event, array $params): bool => ($params['route'] ?? null) === $testSettings['detailRoute'],
+        );
 
     Livewire::withUrlParams(['studyMaterialId' => $model->id])
         ->test($testSettings['componentName'])
