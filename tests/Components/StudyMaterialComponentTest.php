@@ -65,7 +65,7 @@ it('sets and removes the model id in url', function () use ($testSettings): void
     Livewire::test($testSettings['listName'])->call('listAction', $model->id)
         ->assertDispatched(
             'noerdModal',
-            fn (string $event, array $params): bool => ($params['route'] ?? null) === $testSettings['detailRoute'],
+            fn(string $event, array $params): bool => ($params['route'] ?? null) === $testSettings['detailRoute'],
         );
 
     Livewire::withUrlParams(['studyMaterialId' => $model->id])
