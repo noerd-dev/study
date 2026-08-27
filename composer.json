@@ -2,7 +2,7 @@
 	"name": "noerd/study",
 	"description": "Study module for Noerd Framework",
 	"type": "library",
-	"version": "v0.3.10",
+	"version": "v0.3.11",
 	"license": "proprietary",
     "require": {
         "laravel/framework": "^12.0 || ^13.0",
