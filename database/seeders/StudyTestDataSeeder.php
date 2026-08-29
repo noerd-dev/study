@@ -3,6 +3,8 @@
 namespace Nywerk\Study\Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Noerd\Helpers\TenantHelper;
+use Noerd\Models\Tenant;
 use Nywerk\Study\Models\Flashcard;
 use Nywerk\Study\Models\StudyMaterial;
 use Nywerk\Study\Models\Summary;
@@ -11,6 +13,8 @@ class StudyTestDataSeeder extends Seeder
 {
     public function run(): void
     {
+        $tenantId = TenantHelper::getSelectedTenantId() ?? Tenant::query()->value('id');
+
         $materials = [
             [
                 'title' => 'Introduction to Business Informatics',
@@ -52,7 +56,7 @@ class StudyTestDataSeeder extends Seeder
 
         foreach ($materials as $materialData) {
             $studyMaterial = StudyMaterial::create(array_merge($materialData, [
-                'tenant_id' => 1,
+                'tenant_id' => $tenantId,
             ]));
 
             $summaryCount = rand(3, 6);
@@ -60,7 +64,7 @@ class StudyTestDataSeeder extends Seeder
 
             for ($i = 1; $i <= $summaryCount; $i++) {
                 $summaries[] = Summary::factory()->create([
-                    'tenant_id' => 1,
+                    'tenant_id' => $tenantId,
                     'study_material_id' => $studyMaterial->id,
                     'title' => 'Chapter ' . $i,
                 ]);
@@ -76,7 +80,7 @@ class StudyTestDataSeeder extends Seeder
                 }
 
                 Flashcard::factory()->create([
-                    'tenant_id' => 1,
+                    'tenant_id' => $tenantId,
                     'study_material_id' => $studyMaterial->id,
                     'summary_id' => $summaryId,
                 ]);

@@ -1,28 +1,28 @@
 {
-	"name": "noerd/study",
-	"description": "Study module for Noerd Framework",
-	"type": "library",
-	"version": "v0.3.11",
-	"license": "proprietary",
+    "name": "noerd/study",
+    "description": "Study module for Noerd Framework",
+    "type": "library",
+    "version": "v0.3.12",
+    "license": "proprietary",
     "require": {
         "laravel/framework": "^12.0 || ^13.0",
-        "noerd/noerd": "^0.10.0 || ^0.11.0",
+        "noerd/noerd": "^0.10.0 || ^0.11.0 || ^0.12.0",
         "barryvdh/laravel-dompdf": "^3.1"
     },
-	"autoload": {
-		"psr-4": {
-			"Nywerk\\Study\\": "src/",
-			"Nywerk\\Study\\Tests\\": "tests/",
-			"Nywerk\\Study\\Database\\Factories\\": "database/factories/",
-			"Nywerk\\Study\\Database\\Seeders\\": "database/seeders/"
-		}
-	},
-	"minimum-stability": "stable",
-	"extra": {
-		"laravel": {
-			"providers": [
-				"Nywerk\\Study\\Providers\\StudyServiceProvider"
-			]
-		}
-	}
+    "autoload": {
+        "psr-4": {
+            "Nywerk\\Study\\": "src/",
+            "Nywerk\\Study\\Tests\\": "tests/",
+            "Nywerk\\Study\\Database\\Factories\\": "database/factories/",
+            "Nywerk\\Study\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "minimum-stability": "stable",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Nywerk\\Study\\Providers\\StudyServiceProvider"
+            ]
+        }
+    }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Nywerk\Study\Models\Flashcard;
 use Nywerk\Study\Models\StudyMaterial;
 use Nywerk\Study\Models\Summary;
 use Nywerk\Study\Tests\Traits\CreatesStudyUser;
@@ -11,8 +12,6 @@ uses(CreatesStudyUser::class);
 $testSettings = [
     'componentName' => 'study::flashcard-detail',
     'listName' => 'study::flashcards-list',
-    'id' => 'modelId',
-    'urlParam' => 'flashcardId',
 ];
 
 it('validates required fields', function () use ($testSettings): void {
@@ -34,8 +33,11 @@ it('successfully stores the data', function () use ($testSettings): void {
     $studyMaterial = StudyMaterial::factory()->create(['tenant_id' => $user->selected_tenant_id]);
 
     Livewire::test($testSettings['componentName'])
-        ->set('detailData.question', 'What is Laravel?')
-        ->set('detailData.study_material_id', $studyMaterial->id)
+        ->set('detailData', validDetailPayload(Flashcard::class, [
+            'tenant_id' => $user->selected_tenant_id,
+            'question' => 'What is Laravel?',
+            'study_material_id' => $studyMaterial->id,
+        ]))
         ->call('store')
         ->assertHasNoErrors();
 

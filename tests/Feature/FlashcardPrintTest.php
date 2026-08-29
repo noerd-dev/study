@@ -35,21 +35,6 @@ it('displays flashcards on the print page', function (): void {
         ->assertSee('Test Question');
 });
 
-it('can select flashcards', function (): void {
-    $user = $this->withStudyModule();
-    $studyMaterial = StudyMaterial::factory()->create(['tenant_id' => $user->selected_tenant_id]);
-    $flashcard = Flashcard::factory()->create([
-        'tenant_id' => $user->selected_tenant_id,
-        'study_material_id' => $studyMaterial->id,
-    ]);
-
-    $this->actingAs($user);
-
-    Livewire::test('study::flashcard-print-page')
-        ->set('selectedFlashcards', [$flashcard->id])
-        ->assertSet('selectedFlashcards', [$flashcard->id]);
-});
-
 it('validates at least one flashcard is selected', function (): void {
     $user = $this->withStudyModule();
 

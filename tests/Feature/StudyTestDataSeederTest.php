@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Nywerk\Study\Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Noerd\Helpers\TenantHelper;
 use Noerd\Models\Tenant;
 use Nywerk\Study\Database\Seeders\StudyTestDataSeeder;
 use Nywerk\Study\Models\Flashcard;
@@ -14,63 +15,39 @@ use Nywerk\Study\Models\Summary;
 uses(\Tests\TestCase::class, RefreshDatabase::class);
 
 beforeEach(function (): void {
-    Tenant::factory()->create(['id' => 1]);
+    $this->tenant = Tenant::factory()->create();
+    TenantHelper::setSelectedTenantId($this->tenant->id);
+
+    $this->seed(StudyTestDataSeeder::class);
 });
 
-it('seeds study test data', function (): void {
-    $this->seed(StudyTestDataSeeder::class);
+// The seeder always creates new rows (plain create, no firstOrCreate), so it is
+// intentionally NOT idempotent — no re-seed test.
 
-    expect(StudyMaterial::count())->toBe(6);
-});
-
-it('creates summaries for each study material', function (): void {
-    $this->seed(StudyTestDataSeeder::class);
+it('seeds materials with summaries and flashcards for the selected tenant', function (): void {
+    expect(StudyMaterial::where('tenant_id', $this->tenant->id)->count())->toBe(6);
+    expect(Summary::where('tenant_id', '!=', $this->tenant->id)->count())->toBe(0);
+    expect(Flashcard::where('tenant_id', '!=', $this->tenant->id)->count())->toBe(0);
 
     StudyMaterial::all()->each(function (StudyMaterial $material): void {
-        $summaryCount = $material->summaries()->count();
-        expect($summaryCount)->toBeGreaterThanOrEqual(3)
+        expect($material->summaries()->count())->toBeGreaterThanOrEqual(3)
             ->toBeLessThanOrEqual(6);
-    });
-});
-
-it('creates flashcards for each study material', function (): void {
-    $this->seed(StudyTestDataSeeder::class);
-
-    StudyMaterial::all()->each(function (StudyMaterial $material): void {
-        $flashcardCount = $material->flashcards()->count();
-        expect($flashcardCount)->toBeGreaterThanOrEqual(5)
+        expect($material->flashcards()->count())->toBeGreaterThanOrEqual(5)
             ->toBeLessThanOrEqual(10);
     });
 });
 
-it('links some flashcards to summaries', function (): void {
-    $this->seed(StudyTestDataSeeder::class);
-
-    $withSummary = Flashcard::whereNotNull('summary_id')->count();
-    $withoutSummary = Flashcard::whereNull('summary_id')->count();
-
-    expect($withSummary)->toBeGreaterThan(0);
-    expect($withoutSummary)->toBeGreaterThan(0);
-});
-
-it('sets correct tenant_id on all records', function (): void {
-    $this->seed(StudyTestDataSeeder::class);
-
-    expect(StudyMaterial::where('tenant_id', 1)->count())->toBe(6);
-    expect(Summary::where('tenant_id', '!=', 1)->count())->toBe(0);
-    expect(Flashcard::where('tenant_id', '!=', 1)->count())->toBe(0);
-});
-
-it('creates valid foreign key relationships', function (): void {
-    $this->seed(StudyTestDataSeeder::class);
-
+it('links the seeded records to valid materials and summaries', function (): void {
     $materialIds = StudyMaterial::pluck('id');
+    $summaryIds = Summary::pluck('id');
+
+    // Roughly half of the flashcards are linked to a summary
+    expect(Flashcard::whereNotNull('summary_id')->count())->toBeGreaterThan(0);
+    expect(Flashcard::whereNull('summary_id')->count())->toBeGreaterThan(0);
 
     Summary::all()->each(function (Summary $summary) use ($materialIds): void {
         expect($materialIds)->toContain($summary->study_material_id);
     });
-
-    $summaryIds = Summary::pluck('id');
 
     Flashcard::all()->each(function (Flashcard $flashcard) use ($materialIds, $summaryIds): void {
         expect($materialIds)->toContain($flashcard->study_material_id);

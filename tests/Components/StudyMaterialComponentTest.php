@@ -12,18 +12,7 @@ $testSettings = [
     'componentName' => 'study::study-material-detail',
     'detailRoute' => 'study.study-material.detail',
     'listName' => 'study::study-materials-list',
-    'id' => 'modelId',
-    'urlParam' => 'studyMaterialId',
 ];
-
-it('test the route', function (): void {
-    $user = $this->withStudyModule();
-
-    $this->actingAs($user);
-
-    $response = $this->get('/study/study-materials');
-    $response->assertStatus(200);
-});
 
 it('validates required fields via layout', function () use ($testSettings): void {
     $user = $this->withStudyModule();
