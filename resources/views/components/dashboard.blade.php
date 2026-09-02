@@ -7,13 +7,13 @@ use Nywerk\Study\Models\Flashcard;
 use Nywerk\Study\Models\StudyMaterial;
 use Nywerk\Study\Models\Summary;
 
-new class () extends Component {
+new class extends Component {
     use NoerdDetail;
 
     public function mount(): void
     {
         $this->initDetail();
-        TenantHelper::setSelectedAppFromRoute();
+        TenantHelper::setSelectedApp('STUDY');
     }
 
     public function with(): array
