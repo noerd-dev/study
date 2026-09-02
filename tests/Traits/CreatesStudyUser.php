@@ -1,17 +1,33 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nywerk\Study\Tests\Traits;
 
 use Noerd\Helpers\TenantHelper;
 use Noerd\Models\NoerdUser;
 use Noerd\Models\Tenant;
+use Noerd\Models\TenantApp;
 
 trait CreatesStudyUser
 {
     protected function withStudyModule(): NoerdUser
     {
-        $user = NoerdUser::factory()->create();
         $tenant = Tenant::factory()->create();
+
+        $studyApp = TenantApp::firstOrCreate(
+            ['name' => 'STUDY'],
+            [
+                'title' => 'Study',
+                'icon' => 'study::icons.app',
+                'route' => 'study.dashboard',
+                'is_active' => true,
+            ],
+        );
+
+        $tenant->tenantApps()->attach($studyApp->id);
+
+        $user = NoerdUser::factory()->create();
         $user->tenants()->attach($tenant->id);
 
         TenantHelper::setSelectedTenantId($tenant->id);
