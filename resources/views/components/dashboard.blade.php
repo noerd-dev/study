@@ -13,7 +13,6 @@ new class () extends Component {
     public function mount(): void
     {
         $this->initDetail();
-        TenantHelper::setSelectedAppFromRoute();
     }
 
     public function with(): array
