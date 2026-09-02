@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Nywerk\Study\Tests\Feature;
-
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Noerd\Helpers\TenantHelper;
 use Noerd\Models\Tenant;
@@ -12,7 +10,7 @@ use Nywerk\Study\Models\Flashcard;
 use Nywerk\Study\Models\StudyMaterial;
 use Nywerk\Study\Models\Summary;
 
-uses(\Tests\TestCase::class, RefreshDatabase::class);
+uses(Tests\TestCase::class, RefreshDatabase::class);
 
 beforeEach(function (): void {
     $this->tenant = Tenant::factory()->create();

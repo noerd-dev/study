@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nywerk\Study\Tests\Traits;
 
 use Noerd\Helpers\TenantHelper;
@@ -11,8 +13,21 @@ trait CreatesStudyUser
 {
     protected function withStudyModule(): NoerdUser
     {
-        $user = NoerdUser::factory()->create();
         $tenant = Tenant::factory()->create();
+
+        $studyApp = TenantApp::firstOrCreate(
+            ['name' => 'STUDY'],
+            [
+                'title' => 'Study',
+                'icon' => 'study::icons.app',
+                'route' => 'study.dashboard',
+                'is_active' => true,
+            ],
+        );
+
+        $tenant->tenantApps()->attach($studyApp->id);
+
+        $user = NoerdUser::factory()->create();
         $user->tenants()->attach($tenant->id);
 
         // The study routes run behind `app-access:study`, which only lets the
