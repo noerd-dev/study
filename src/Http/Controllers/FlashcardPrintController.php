@@ -20,11 +20,16 @@ class FlashcardPrintController extends Controller
             return back()->withErrors(['selection' => __('Please select at least one flashcard.')]);
         }
 
-        $flashcards = Flashcard::whereIn('id', $flashcardIds)
+        $orderedIds = array_map('intval', $flashcardIds);
+
+        // FIELD() is MySQL-only, so the selection order is restored in PHP to
+        // keep the query portable (the test suite runs on SQLite).
+        $flashcards = Flashcard::whereIn('id', $orderedIds)
             ->where('tenant_id', Auth::user()->selected_tenant_id)
             ->with(['studyMaterial', 'summary'])
-            ->orderByRaw('FIELD(id, ' . implode(',', array_map('intval', $flashcardIds)) . ')')
-            ->get();
+            ->get()
+            ->sortBy(fn (Flashcard $flashcard): int => (int) array_search($flashcard->id, $orderedIds, true))
+            ->values();
 
         if ($flashcards->isEmpty()) {
             return back()->withErrors(['selection' => __('Please select at least one flashcard.')]);
