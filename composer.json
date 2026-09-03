@@ -2,11 +2,11 @@
     "name": "noerd/study",
     "description": "Study module for Noerd Framework",
     "type": "library",
-    "version": "v0.3.16",
+    "version": "v0.3.17",
     "license": "proprietary",
     "require": {
         "laravel/framework": "^12.0 || ^13.0",
-        "noerd/noerd": "^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^0.14.0",
+        "noerd/noerd": "^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^0.14.0 || ^0.15.0",
         "barryvdh/laravel-dompdf": "^3.1"
     },
     "autoload": {
