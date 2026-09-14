@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Nywerk\Study\Tests\Traits;
 
+use Noerd\Helpers\NoerdAuth;
 use Noerd\Helpers\TenantHelper;
 use Noerd\Models\NoerdUser;
 use Noerd\Models\Tenant;
@@ -31,6 +32,10 @@ trait CreatesStudyUser
 
         $user = NoerdUser::factory()->create();
         $user->tenants()->attach($tenant->id);
+
+        // Log in on noerd's own guard first: tenant scoping resolves the user
+        // through it, and the tenant selection is only persisted for that user.
+        $this->actingAs($user, NoerdAuth::GUARD);
 
         TenantHelper::setSelectedTenantId($tenant->id);
         TenantHelper::setSelectedApp('STUDY');

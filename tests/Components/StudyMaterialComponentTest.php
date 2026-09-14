@@ -14,7 +14,7 @@ beforeEach(function (): void {
     $this->user = $this->withStudyModule();
     $this->tenantId = $this->user->selected_tenant_id;
 
-    $this->actingAs($this->user);
+    $this->actingAs($this->user, 'noerd');
 });
 
 it('validates required fields via layout', function (): void {

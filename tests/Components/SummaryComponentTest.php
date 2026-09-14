@@ -6,15 +6,16 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Nywerk\Study\Models\StudyMaterial;
 use Nywerk\Study\Models\Summary;
 use Nywerk\Study\Tests\Traits\CreatesStudyUser;
+use Tests\TestCase;
 
-uses(Tests\TestCase::class, RefreshDatabase::class);
+uses(TestCase::class, RefreshDatabase::class);
 uses(CreatesStudyUser::class);
 
 beforeEach(function (): void {
     $this->user = $this->withStudyModule();
     $this->tenantId = $this->user->selected_tenant_id;
 
-    $this->actingAs($this->user);
+    $this->actingAs($this->user, 'noerd');
 });
 
 it('validates the data', function (): void {

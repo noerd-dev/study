@@ -12,7 +12,7 @@ uses(CreatesStudyUser::class);
 
 beforeEach(function (): void {
     $this->user = $this->withStudyModule();
-    $this->actingAs($this->user);
+    $this->actingAs($this->user, 'noerd');
 });
 
 it('loads the dashboard via direct route', function (): void {

@@ -8,15 +8,16 @@ use Nywerk\Study\Models\Flashcard;
 use Nywerk\Study\Models\StudyMaterial;
 use Nywerk\Study\Models\Summary;
 use Nywerk\Study\Tests\Traits\CreatesStudyUser;
+use Tests\TestCase;
 
-uses(Tests\TestCase::class, RefreshDatabase::class);
+uses(TestCase::class, RefreshDatabase::class);
 uses(CreatesStudyUser::class);
 
 it('counts only the records of the selected tenant', function (): void {
     $user = $this->withStudyModule();
     $tenantId = $user->selected_tenant_id;
 
-    $this->actingAs($user);
+    $this->actingAs($user, 'noerd');
 
     $material = StudyMaterial::factory()->create(['tenant_id' => $tenantId]);
     Summary::factory()->count(2)->create([
