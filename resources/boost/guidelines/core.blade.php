@@ -48,18 +48,15 @@ what is specific to this module.
   `study.study-material.detail`, `study.summary.detail`, `study.flashcard.detail` (record routes
   used by route modals), `study.flashcards-print` (page) and `study.flashcards-print.pdf`
 - Tenant app name is `STUDY` (uppercase) — gates and test traits compare exactly. The tenant-app
-  row is registered twice: by the module migration `add_study_tenant_app` (raw MySQL `INSERT …
-  SELECT … NOW()` wrapped in try/catch — it only logs on other drivers) and by the stub
-  `app-configs/stubs/add_study_tenant_app.php.stub` published by `noerd:install-study`
+  row is registered by the stub `app-configs/stubs/add_study_tenant_app.php.stub`, published into the host by `noerd:install-study` (and by `noerd:update-study` when the host has none yet), so a deployment that only runs `php artisan migrate` registers the app. The module ships no registering migration of its own
 - App icon: Blade icon `resources/views/components/icons/app.blade.php` (`study::icons.app`)
 - Translations: `resources/lang/de.json` (English keys)
 - `database/seeders/StudyTestDataSeeder.php` seeds demo materials, summaries and flashcards for
   the selected tenant (falls back to the first tenant)
 
 ### Commands
-- `php artisan noerd:install-study` — installs YAML configs, registers the tenant app, runs
-  migrations; afterwards `registerModule()` shells out to `composer require noerd/study` /
-  `composer dump-autoload` and clears the config/cache/services caches
+- `php artisan noerd:install-study` — installs YAML configs, registers the tenant app, offers the
+  migrations (the plain `runModuleInstallation()` flow, nothing else)
 - `php artisan noerd:update-study` — idempotent update of the YAML configs (picked up by
   `noerd:update-all`)
 
