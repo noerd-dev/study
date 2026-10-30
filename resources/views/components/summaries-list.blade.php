@@ -33,17 +33,6 @@ new class extends Component {
 
         return $this->buildList($rows);
     }
-
-    public function rendering()
-    {
-        if ((int) request()->summaryId) {
-            $this->listAction(request()->summaryId);
-        }
-
-        if (request()->create) {
-            $this->listAction();
-        }
-    }
 }; ?>
 
 <x-noerd::page>

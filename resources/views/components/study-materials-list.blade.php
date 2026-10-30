@@ -9,17 +9,6 @@ new class extends Component {
 
     public $listModel = StudyMaterial::class;
     public ?string $detailRoute = 'study.study-material.detail';
-
-    public function rendering()
-    {
-        if ((int) request()->studyMaterialId) {
-            $this->listAction(request()->studyMaterialId);
-        }
-
-        if (request()->create) {
-            $this->listAction();
-        }
-    }
 }; ?>
 
 <x-noerd::page>

@@ -41,14 +41,6 @@ new class extends Component {
     public function rendering()
     {
         $this->loadListFilters();
-
-        if ((int) request()->flashcardId) {
-            $this->listAction(request()->flashcardId);
-        }
-
-        if (request()->create) {
-            $this->listAction();
-        }
     }
 }; ?>
 
