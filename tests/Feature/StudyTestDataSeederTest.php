@@ -23,31 +23,31 @@ beforeEach(function (): void {
 // intentionally NOT idempotent — no re-seed test.
 
 it('seeds materials with summaries and flashcards for the selected tenant', function (): void {
-    expect(StudyMaterial::where('tenant_id', $this->tenant->id)->count())->toBe(6);
-    expect(Summary::where('tenant_id', '!=', $this->tenant->id)->count())->toBe(0);
-    expect(Flashcard::where('tenant_id', '!=', $this->tenant->id)->count())->toBe(0);
+    expect(StudyMaterial::query()->ofTenant($this->tenant->id)->count())->toBe(6);
+    expect(Summary::query()->acrossTenants()->where('tenant_id', '!=', $this->tenant->id)->count())->toBe(0);
+    expect(Flashcard::query()->acrossTenants()->where('tenant_id', '!=', $this->tenant->id)->count())->toBe(0);
 
-    StudyMaterial::all()->each(function (StudyMaterial $material): void {
-        expect($material->summaries()->count())->toBeGreaterThanOrEqual(3)
+    StudyMaterial::query()->ofTenant($this->tenant->id)->get()->each(function (StudyMaterial $material): void {
+        expect($material->summaries()->ofTenant($material->tenant_id)->count())->toBeGreaterThanOrEqual(3)
             ->toBeLessThanOrEqual(6);
-        expect($material->flashcards()->count())->toBeGreaterThanOrEqual(5)
+        expect($material->flashcards()->ofTenant($material->tenant_id)->count())->toBeGreaterThanOrEqual(5)
             ->toBeLessThanOrEqual(10);
     });
 });
 
 it('links the seeded records to valid materials and summaries', function (): void {
-    $materialIds = StudyMaterial::pluck('id');
-    $summaryIds = Summary::pluck('id');
+    $materialIds = StudyMaterial::query()->ofTenant($this->tenant->id)->pluck('id');
+    $summaryIds = Summary::query()->ofTenant($this->tenant->id)->pluck('id');
 
     // Roughly half of the flashcards are linked to a summary
-    expect(Flashcard::whereNotNull('summary_id')->count())->toBeGreaterThan(0);
-    expect(Flashcard::whereNull('summary_id')->count())->toBeGreaterThan(0);
+    expect(Flashcard::query()->ofTenant($this->tenant->id)->whereNotNull('summary_id')->count())->toBeGreaterThan(0);
+    expect(Flashcard::query()->ofTenant($this->tenant->id)->whereNull('summary_id')->count())->toBeGreaterThan(0);
 
-    Summary::all()->each(function (Summary $summary) use ($materialIds): void {
+    Summary::query()->ofTenant($this->tenant->id)->get()->each(function (Summary $summary) use ($materialIds): void {
         expect($materialIds)->toContain($summary->study_material_id);
     });
 
-    Flashcard::all()->each(function (Flashcard $flashcard) use ($materialIds, $summaryIds): void {
+    Flashcard::query()->ofTenant($this->tenant->id)->get()->each(function (Flashcard $flashcard) use ($materialIds, $summaryIds): void {
         expect($materialIds)->toContain($flashcard->study_material_id);
 
         if ($flashcard->summary_id !== null) {
