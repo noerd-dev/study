@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Nywerk\Study\Commands;
 
 use Illuminate\Console\Command;
-use Noerd\Traits\HasModuleInstallation;
+use Noerd\Commands\Concerns\HasModuleInstallation;
 
 class StudyInstallCommand extends Command
 {
