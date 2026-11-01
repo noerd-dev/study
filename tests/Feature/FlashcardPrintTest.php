@@ -7,14 +7,12 @@ use Noerd\Models\NoerdUser;
 use Noerd\Models\Tenant;
 use Nywerk\Study\Models\Flashcard;
 use Nywerk\Study\Models\StudyMaterial;
-use Nywerk\Study\Tests\Traits\CreatesStudyUser;
 use Tests\TestCase;
 
 uses(TestCase::class, RefreshDatabase::class);
-uses(CreatesStudyUser::class);
 
 beforeEach(function (): void {
-    $this->user = $this->withStudyModule();
+    $this->user = createNoerdUserForApp('STUDY');
     $this->tenantId = $this->user->selected_tenant_id;
 
     $this->actingAs($this->user, 'noerd');

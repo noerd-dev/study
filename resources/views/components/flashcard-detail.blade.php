@@ -1,11 +1,8 @@
 <?php
 
-use Livewire\Attributes\On;
 use Livewire\Component;
 use Noerd\Traits\NoerdDetail;
 use Nywerk\Study\Models\Flashcard;
-use Nywerk\Study\Models\StudyMaterial;
-use Nywerk\Study\Models\Summary;
 
 new class extends Component {
     use NoerdDetail;
@@ -24,35 +21,7 @@ new class extends Component {
             $this->detailData['study_material_id'] = $this->relations['study_material_id'];
         }
 
-        if ($this->detailData['study_material_id'] ?? null) {
-            $this->relationTitles['study_material_id'] = StudyMaterial::find($this->detailData['study_material_id'])?->title;
-        }
-
-        if ($this->detailData['summary_id'] ?? null) {
-            $this->relationTitles['summary_id'] = Summary::find($this->detailData['summary_id'])?->title;
-        }
-
         $this->preselect('study_material_id');
-
-        if (! isset($this->detailData['created_date'])) {
-            $this->detailData['created_date'] = now()->format('Y-m-d');
-        }
-    }
-
-    #[On('studyMaterialSelected')]
-    public function studyMaterialSelected($studyMaterialId): void
-    {
-        $studyMaterial = StudyMaterial::find($studyMaterialId);
-        $this->detailData['study_material_id'] = $studyMaterial->id;
-        $this->relationTitles['study_material_id'] = $studyMaterial->title;
-    }
-
-    #[On('summarySelected')]
-    public function summarySelected($summaryId): void
-    {
-        $summary = Summary::find($summaryId);
-        $this->detailData['summary_id'] = $summary->id;
-        $this->relationTitles['summary_id'] = $summary->title;
     }
 
     public function store(): void
@@ -66,7 +35,6 @@ new class extends Component {
 
         $this->storeProcess($flashcard);
     }
-
 }; ?>
 
 <x-noerd::page>

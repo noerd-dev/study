@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Noerd\Helpers\TenantHelper;
-use Nywerk\Study\Tests\Traits\CreatesStudyUser;
 use Tests\TestCase;
 
 uses(TestCase::class, RefreshDatabase::class);
-uses(CreatesStudyUser::class);
 
 beforeEach(function (): void {
-    $this->user = $this->withStudyModule();
+    $this->user = createNoerdUserForApp('STUDY');
     $this->actingAs($this->user, 'noerd');
 });
 

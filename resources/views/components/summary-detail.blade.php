@@ -1,9 +1,7 @@
 <?php
 
-use Livewire\Attributes\On;
 use Livewire\Component;
 use Noerd\Traits\NoerdDetail;
-use Nywerk\Study\Models\StudyMaterial;
 use Nywerk\Study\Models\Summary;
 
 new class extends Component {
@@ -23,19 +21,7 @@ new class extends Component {
             $this->detailData['study_material_id'] = $this->relations['study_material_id'];
         }
 
-        if ($this->detailData['study_material_id'] ?? null) {
-            $this->relationTitles['study_material_id'] = StudyMaterial::find($this->detailData['study_material_id'])?->title;
-        }
-
         $this->preselect('study_material_id');
-    }
-
-    #[On('studyMaterialSelected')]
-    public function studyMaterialSelected($studyMaterialId): void
-    {
-        $studyMaterial = StudyMaterial::find($studyMaterialId);
-        $this->detailData['study_material_id'] = $studyMaterial->id;
-        $this->relationTitles['study_material_id'] = $studyMaterial->title;
     }
 
     public function store(): void
@@ -49,7 +35,6 @@ new class extends Component {
 
         $this->storeProcess($summary);
     }
-
 }; ?>
 
 <x-noerd::page>

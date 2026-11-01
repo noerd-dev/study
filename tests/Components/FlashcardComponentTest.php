@@ -5,15 +5,12 @@ declare(strict_types=1);
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Nywerk\Study\Models\Flashcard;
 use Nywerk\Study\Models\StudyMaterial;
-use Nywerk\Study\Models\Summary;
-use Nywerk\Study\Tests\Traits\CreatesStudyUser;
 use Tests\TestCase;
 
 uses(TestCase::class, RefreshDatabase::class);
-uses(CreatesStudyUser::class);
 
 beforeEach(function (): void {
-    $this->user = $this->withStudyModule();
+    $this->user = createNoerdUserForApp('STUDY');
     $this->tenantId = $this->user->selected_tenant_id;
 
     $this->actingAs($this->user, 'noerd');
@@ -45,29 +42,6 @@ describe('flashcard detail', function (): void {
         ]);
     });
 
-    it('handles study material selection correctly', function (): void {
-        $studyMaterial = StudyMaterial::factory()->create(['tenant_id' => $this->tenantId]);
-
-        Livewire::test('study::flashcard-detail')
-            ->call('studyMaterialSelected', $studyMaterial->id)
-            ->assertSet('detailData.study_material_id', $studyMaterial->id)
-            ->assertSet('relationTitles.study_material_id', $studyMaterial->title)
-            ->assertHasNoErrors();
-    });
-
-    it('handles summary selection correctly', function (): void {
-        $studyMaterial = StudyMaterial::factory()->create(['tenant_id' => $this->tenantId]);
-        $summary = Summary::factory()->create([
-            'tenant_id' => $this->tenantId,
-            'study_material_id' => $studyMaterial->id,
-        ]);
-
-        Livewire::test('study::flashcard-detail')
-            ->call('summarySelected', $summary->id)
-            ->assertSet('detailData.summary_id', $summary->id)
-            ->assertSet('relationTitles.summary_id', $summary->title)
-            ->assertHasNoErrors();
-    });
 
     it('preselects study material from session on mount', function (): void {
         $studyMaterial = StudyMaterial::factory()->create(['tenant_id' => $this->tenantId]);
@@ -85,7 +59,6 @@ describe('flashcard detail', function (): void {
 
         Livewire::test('study::flashcard-detail', ['relations' => ['study_material_id' => $studyMaterial->id]])
             ->assertSet('detailData.study_material_id', $studyMaterial->id)
-            ->assertSet('relationTitles.study_material_id', $studyMaterial->title)
             ->assertHasNoErrors();
     });
 });

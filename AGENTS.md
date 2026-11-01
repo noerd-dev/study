@@ -38,11 +38,11 @@ app name `STUDY`.
 ## Working on the module
 
 - Tests bind `Tests\TestCase` + `RefreshDatabase` (host-bound, MySQL). From the host project:
-  `php artisan test --compact app-modules/study/tests`. `tests/Traits/CreatesStudyUser.php` sets
-  up tenant, user and the `STUDY` app. Tests prove mechanics, never the current YAML
+  `php artisan test --compact app-modules/study/tests`. The core's `createNoerdUserForApp('STUDY')`
+  sets up tenant, user and the `STUDY` app. Tests prove mechanics, never the current YAML
   configuration.
 - `Nywerk\Study\Tests\` stays in the production `autoload` of `composer.json`: a path-repository's
-  `autoload-dev` is not loaded by the host, and host-root runs need the test trait.
+  `autoload-dev` is not loaded by the host.
 - Format from the host project root with an explicit path: `vendor/bin/pint app-modules/study`
   (a plain `--dirty` run silently skips submodule files)
 - Keep queries portable (no MySQL-only SQL in application code); keep the module independent of

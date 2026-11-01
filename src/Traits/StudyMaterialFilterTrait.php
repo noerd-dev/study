@@ -2,31 +2,13 @@
 
 namespace Nywerk\Study\Traits;
 
+use Noerd\Support\ListFilter;
 use Nywerk\Study\Models\StudyMaterial;
 
 trait StudyMaterialFilterTrait
 {
-    protected function getStudyMaterialsListFilter(): array
+    protected function getStudyMaterialsListFilter(): ListFilter
     {
-        $filter['label'] = __('Study Material');
-        $filter['column'] = 'study_material_id';
-        $filter['type'] = 'Picklist';
-        $filter['options'] = [
-            null => __('All Study Materials'),
-        ];
-
-        $options = StudyMaterial::orderBy('title', 'asc')->get()
-            ->map(fn($studyMaterial) => [
-                'id' => $studyMaterial->id,
-                'name' => $studyMaterial->title,
-            ])
-            ->pluck('name', 'id')
-            ->toArray();
-
-        foreach ($options as $key => $option) {
-            $filter['options'][$key] = $option;
-        }
-
-        return $filter;
+        return ListFilter::model(__('Study Material'), 'study_material_id', StudyMaterial::class, 'title');
     }
 }

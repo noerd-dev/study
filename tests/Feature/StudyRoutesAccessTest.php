@@ -6,9 +6,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Noerd\Models\NoerdUser;
 use Noerd\Models\Tenant;
 use Noerd\Models\TenantApp;
-use Nywerk\Study\Tests\Traits\CreatesStudyUser;
 
-uses(Tests\TestCase::class, RefreshDatabase::class, CreatesStudyUser::class);
+uses(Tests\TestCase::class, RefreshDatabase::class);
 
 it('redirects guests to the login', function (): void {
     $this->get('/study/study-materials')->assertRedirect(route('noerd.login'));
@@ -32,7 +31,7 @@ it('rejects a tenant without the STUDY app', function (): void {
 });
 
 it('lets a tenant with the STUDY app open the study materials list', function (): void {
-    $user = $this->withStudyModule();
+    $user = createNoerdUserForApp('STUDY');
     $tenant = $user->tenants()->firstOrFail();
     $user->update(['selected_tenant_id' => $tenant->id]);
 

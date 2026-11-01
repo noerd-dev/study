@@ -4,12 +4,12 @@ tabs:
   - number: 1
     label: General
   - label: Summaries
-    component: summaries-list
+    component: study::summaries-list
     arguments:
       studyMaterialId: $modelId
     requiresId: true
   - label: Flashcards
-    component: flashcards-list
+    component: study::flashcards-list
     arguments:
       studyMaterialId: $modelId
     requiresId: true

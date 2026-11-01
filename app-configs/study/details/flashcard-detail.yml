@@ -12,6 +12,7 @@ fields:
   - name: detailData.created_date
     label: Created Date
     type: date
+    default: today
     colspan: 12
   - name: detailData.question
     label: Question

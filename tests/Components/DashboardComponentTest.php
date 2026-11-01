@@ -7,14 +7,12 @@ use Noerd\Models\Tenant;
 use Nywerk\Study\Models\Flashcard;
 use Nywerk\Study\Models\StudyMaterial;
 use Nywerk\Study\Models\Summary;
-use Nywerk\Study\Tests\Traits\CreatesStudyUser;
 use Tests\TestCase;
 
 uses(TestCase::class, RefreshDatabase::class);
-uses(CreatesStudyUser::class);
 
 it('counts only the records of the selected tenant', function (): void {
-    $user = $this->withStudyModule();
+    $user = createNoerdUserForApp('STUDY');
     $tenantId = $user->selected_tenant_id;
 
     $this->actingAs($user, 'noerd');

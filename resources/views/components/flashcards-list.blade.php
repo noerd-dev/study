@@ -12,8 +12,13 @@ new class extends Component {
 
     public $listModel = Flashcard::class;
     public ?string $detailRoute = 'study.flashcard.detail';
+    public $detailComponent = 'study::flashcard-detail';
 
     public ?int $studyMaterialId = null;
+
+    protected array $listWith = ['studyMaterial', 'summary'];
+
+    protected array $listScopes = ['study_material_id' => 'studyMaterialId'];
 
     public function listAction(mixed $modelId = null, array $relations = []): void
     {
@@ -22,13 +27,7 @@ new class extends Component {
 
     public function listData(): array
     {
-        $rows = $this->listQuery($this->listModel)
-            ->with('studyMaterial', 'summary')
-            ->when($this->studyMaterialId, function ($query): void {
-                $query->where('study_material_id', $this->studyMaterialId);
-            })
-            ->tap(fn ($query) => $this->applyListFilters($query))
-            ->paginate($this->perPage);
+        $rows = $this->paginateList($this->listQuery($this->listModel));
 
         foreach ($rows as $row) {
             $row->studyMaterial = $row->studyMaterial?->title;
@@ -36,11 +35,6 @@ new class extends Component {
         }
 
         return $this->buildList($rows);
-    }
-
-    public function rendering()
-    {
-        $this->loadListFilters();
     }
 }; ?>
 

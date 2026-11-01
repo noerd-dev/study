@@ -9,6 +9,7 @@ new class extends Component {
 
     public $listModel = StudyMaterial::class;
     public ?string $detailRoute = 'study.study-material.detail';
+    public $detailComponent = 'study::study-material-detail';
 }; ?>
 
 <x-noerd::page>

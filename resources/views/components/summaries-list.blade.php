@@ -10,8 +10,13 @@ new class extends Component {
 
     public $listModel = Summary::class;
     public ?string $detailRoute = 'study.summary.detail';
+    public $detailComponent = 'study::summary-detail';
 
     public ?int $studyMaterialId = null;
+
+    protected array $listWith = ['studyMaterial'];
+
+    protected array $listScopes = ['study_material_id' => 'studyMaterialId'];
 
     public function listAction(mixed $modelId = null, array $relations = []): void
     {
@@ -20,12 +25,7 @@ new class extends Component {
 
     public function listData(): array
     {
-        $rows = $this->listQuery($this->listModel)
-            ->with('studyMaterial')
-            ->when($this->studyMaterialId, function ($query): void {
-                $query->where('study_material_id', $this->studyMaterialId);
-            })
-            ->paginate($this->perPage);
+        $rows = $this->paginateList($this->listQuery($this->listModel));
 
         foreach ($rows as $row) {
             $row->studyMaterial = $row->studyMaterial?->title;

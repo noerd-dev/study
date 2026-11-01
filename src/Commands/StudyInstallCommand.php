@@ -11,14 +11,9 @@ class StudyInstallCommand extends Command
 {
     use HasModuleInstallation;
 
-    protected $signature = 'noerd:install-study {--force : Overwrite existing files without asking}';
+    protected $signature = 'noerd:install-study';
 
     protected $description = 'Install noerd Study module';
-
-    public function handle(): int
-    {
-        return $this->runModuleInstallation();
-    }
 
     protected function getModuleName(): string
     {
@@ -28,11 +23,6 @@ class StudyInstallCommand extends Command
     protected function getModuleKey(): string
     {
         return 'study';
-    }
-
-    protected function getDefaultAppTitle(): string
-    {
-        return 'Study';
     }
 
     protected function getAppIcon(): string
@@ -49,5 +39,4 @@ class StudyInstallCommand extends Command
     {
         return dirname(__DIR__, 2) . '/app-configs/study';
     }
-
 }

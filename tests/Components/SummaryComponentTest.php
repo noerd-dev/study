@@ -5,14 +5,12 @@ declare(strict_types=1);
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Nywerk\Study\Models\StudyMaterial;
 use Nywerk\Study\Models\Summary;
-use Nywerk\Study\Tests\Traits\CreatesStudyUser;
 use Tests\TestCase;
 
 uses(TestCase::class, RefreshDatabase::class);
-uses(CreatesStudyUser::class);
 
 beforeEach(function (): void {
-    $this->user = $this->withStudyModule();
+    $this->user = createNoerdUserForApp('STUDY');
     $this->tenantId = $this->user->selected_tenant_id;
 
     $this->actingAs($this->user, 'noerd');
@@ -59,7 +57,7 @@ it('it sets and removes the model id in url', function (): void {
         ->assertHasNoErrors();
 });
 
-it('mounts with study material relation title from existing summary', function (): void {
+it('mounts an existing summary with its study material', function (): void {
     $studyMaterial = StudyMaterial::factory()->create(['tenant_id' => $this->tenantId, 'title' => 'Clean Code']);
 
     $summary = Summary::factory()->create([
@@ -71,6 +69,5 @@ it('mounts with study material relation title from existing summary', function (
         ->test('study::summary-detail')
         ->assertSet('modelId', $summary->id)
         ->assertSet('detailData.study_material_id', $studyMaterial->id)
-        ->assertSet('relationTitles.study_material_id', 'Clean Code')
         ->assertHasNoErrors();
 });

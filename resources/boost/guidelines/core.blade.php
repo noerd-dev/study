@@ -21,22 +21,28 @@ what is specific to this module.
   `noerd/customer` nor `noerd/party`
 
 ### Structure
-- Livewire components (flat, `resources/views/components/`, namespace `study::`):
-  `dashboard` (count cards per tenant; sets the selected app to `STUDY` in `mount()`),
+- Livewire components (flat, `resources/views/components/`, namespace `study::` — the provider
+  extends `NoerdModuleServiceProvider`, no bare component names; always reference
+  `study::{name}`): `dashboard` (a `NoerdPage` with count cards; the route's `app-access:study`
+  selects the app, the dashboard never does),
   `study-materials-list` + `study-material-detail` (slim; the detail calls
   `setPreselect('study_material_id', $modelId)` so summaries/flashcards created from it are
   prefilled), `summaries-list` + `summary-detail`, `flashcards-list` + `flashcard-detail`,
   `flashcard-print-page` (checkbox selection of at most 8 flashcards, then a redirect to the PDF
   route). Detail components keep the hard-coded `validate()` of their `store()` (question /
   title + `exists:study_materials,id`) — assert those fields explicitly in tests
-- Narrowed lists: `summaries-list` and `flashcards-list` accept `studyMaterialId`; both override
+- Narrowed lists: `summaries-list` and `flashcards-list` accept `studyMaterialId` and narrow
+  through `$listScopes = ['study_material_id' => 'studyMaterialId']` (eager loads in
+  `$listWith`); both override
   `listAction()` with `Noerd::modalFor('{route}', '{component}', ['modelId' => …, 'relations' => ['study_material_id' => …]])`
   so a record created from the narrowed list belongs to that material. The details read
-  `$this->relations['study_material_id']` in `mount()` and call `preselect('study_material_id')`
+  `$this->relations['study_material_id']` in `mount()` and call `preselect('study_material_id')`.
+  The relation fields keep `detailData` and their titles in sync themselves — the details have
+  no `*Selected` handlers; the default `created_date` of a flashcard is YAML (`default: today`)
 - Relation field types registered in `StudyServiceProvider`: `studyMaterialRelation` (event
   `studyMaterialSelected`) and `summaryRelation` (event `summarySelected`), both with
-  `titleResolver: 'title'`; `flashcards-list` adds the `StudyMaterialFilterTrait` picklist filter
-  (`study_material_id`)
+  `titleResolver: 'title'`; `flashcards-list` adds the `StudyMaterialFilterTrait` header filter
+  (`getStudyMaterialsListFilter()`, a `ListFilter::model()` on `study_material_id`)
 - PDF: `FlashcardPrintController::print()` (`barryvdh/laravel-dompdf`, view
   `study::pdf.flashcards`, A4, inline response) takes `flashcard_ids[]`, scopes them to the
   selected tenant and restores the selection order in PHP — never with MySQL `FIELD()`, the suite
@@ -63,15 +69,15 @@ what is specific to this module.
 ### Tests
 - Pest tests in `tests/Feature` and `tests/Components`, bound to `Tests\TestCase` +
   `RefreshDatabase` (host-bound, MySQL); run with `php artisan test --compact app-modules/study/tests`
-- `tests/Traits/CreatesStudyUser.php` provides `withStudyModule()` (tenant with the `STUDY` app
-  attached, user, `TenantHelper` selection) — the routes sit behind `app-access:study`, so the app
-  assignment is mandatory
+- The user fixture is the core's `createNoerdUserForApp('STUDY')` / `actingAsNoerdUserForApp('STUDY')`
+  (tenant with the `STUDY` app assigned, user, `TenantHelper` selection) — the routes sit behind
+  `app-access:study`, so the app assignment is mandatory. The module has no test trait of its own
 - Prove mechanics, never the current YAML configuration (see the `noerd-testing` skill)
 
 ### Reference implementations
 - `flashcards-list.blade.php` — a narrowed list (`studyMaterialId`) with a filter trait and a
   `listAction()` override that hands `relations` to the detail
-- `flashcard-detail.blade.php` — two relation fields with `*Selected` handlers, `relations`
-  preselection and a data-dependent default (`created_date`) set in `mount()`
+- `flashcard-detail.blade.php` — two relation fields, `relations` preselection and the session
+  preselect (`preselect('study_material_id')`) without a `*Selected` handler
 - `src/Http/Controllers/FlashcardPrintController.php` — tenant-scoped PDF generation
 @endverbatim
