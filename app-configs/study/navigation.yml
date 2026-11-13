@@ -2,7 +2,7 @@
   name: study
   hidden: true
   route: study.dashboard
-  block_menus:
+  blockMenus:
     - title: Dashboard
       route: study.dashboard
       heroicon: home

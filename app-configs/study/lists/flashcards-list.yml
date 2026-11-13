@@ -11,14 +11,14 @@ columns:
     label: Question
   - field: studyMaterial
     label: Book
-    type: relation_link
+    type: relationLink
     route: study.study-material.detail
     modalComponent: study::study-material-detail
     idField: study_material_id
     idParam: modelId
   - field: summary
     label: Summary
-    type: relation_link
+    type: relationLink
     route: study.summary.detail
     modalComponent: study::summary-detail
     idField: summary_id
