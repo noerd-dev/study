@@ -167,7 +167,7 @@
                             </div>
                             <div class="card-content">
                                 @if ($flashcard->answer)
-                                    {!! \Noerd\Support\SafeMarkdown::render($flashcard->answer) !!}
+                                    {!! \Noerd\Support\SafeMarkdown::renderForDocument($flashcard->answer) !!}
                                 @else
                                     <em>-</em>
                                 @endif
